@@ -27,7 +27,7 @@ On_username
 
 On_homeurl
 {
-	"https://github.com/MysticRakkoon/ObieGhost.github.io/tree/main/Updates/obie"
+	"https://raw.githubusercontent.com/MysticRakkoon/ObieGhost.github.io/refs/heads/main/Updates/obie/updates.txt"
 }
 
 
