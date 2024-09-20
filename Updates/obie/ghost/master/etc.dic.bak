@@ -727,16 +727,16 @@ OnShellScaling
 	if reference0 >= 150 //this number is the percentage that you're scaling the ghost up to. In this case, it's 150%.
 	{
 		"\0\s[2]\i[22]\e"
-		"\0\s[0]\e"
+		"\0\s[0]'....'\e"
 	}
 	elseif reference0 == 100 //this is 100%
 	{
-		"\0\s[0]\e"
+		"\0\s[0]'.....'\e"
 		"\0\s[1]'I am normal sized???'\w8\s[2]\n\n[half]* (How was it able to change my size? What power does it hold to do such a thing?)\e"
 	}
 	elseif reference0 == 50 //this is 50%. You can add any percentage that's listed under shell scaling if you want using more elseifs.
 	{
-		"\0\s[0]\e"
+		"\0\s[0]'....'\e"
 		"\0\s[0]\i[25]'Everything looks so big\w3.\w3.\w3.'\w8\n\n'I feel so tiny\w2.\w2.\w2.'\e"
 	}
 }

@@ -7,7 +7,7 @@ kero.name, Cliff
 
 craftman,MysticRakkoon
 craftmanw,MysticRakkoon
-craftmanurl,https://x.com/MysticRakkoon
+craftmanurl,https://github.com/MysticRakkoon/ObieGhost.github.io/tree/main/
 
 sstp.allowunspecifiedsend,0
 shiori,yaya.dll

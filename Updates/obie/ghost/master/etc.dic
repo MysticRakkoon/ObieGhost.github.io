@@ -292,7 +292,7 @@ OnBIFFFailure
 	}
  	else //if there's some other kind of error.
 	{
-		"\0\s[0]'We can't connect to the account.\w8\n\n[half]The error returned is '%(reference[0])'.\e"
+		"\0\s[0]'We can't connect to the account. \w8\n\n[half]The error returned is '%(reference[0])'.\e"
 		
 		//reference0 here stores the error message the email server would have given the ghost, hopefully.
  	}
