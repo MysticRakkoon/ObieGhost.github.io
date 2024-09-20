@@ -1,0 +1,4 @@
+charset,UTF-8
+type,balloon
+name,Cosmic Pixel 4 - Cyan
+directory,cosmic_pixel_4_cyan

@@ -1,0 +1,5 @@
+﻿charset,UTF-8
+type,ghost
+name,Obie
+directory,Obie
+balloon.directory,cosmic_pixel_4_cyan

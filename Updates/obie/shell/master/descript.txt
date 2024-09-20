@@ -1,0 +1,64 @@
+﻿seriko.alignmenttodesktop,free
+
+seriko.use_self_alpha,1
+
+charset,UTF-8
+type,shell
+name,Diamond Shell
+craftman,MysticRakkoon
+craftmanurl,https://x.com/MysticRakkoon
+
+sakura.balloon.offsetx,10
+sakura.balloon.offsety,10
+kero.balloon.offsetx,0
+kero.balloon.offsety,0
+sakura.balloon.alignment,none
+kero.balloon.alignment,none
+
+shiori.logo.filename,resources\niseshiori.png
+shiori.logo.x,16
+shiori.logo.y,256
+
+menu.background.font.color.r,255
+menu.background.font.color.g,230
+menu.background.font.color.b,230
+
+menu.foreground.font.color.r,255
+menu.foreground.font.color.g,255
+menu.foreground.font.color.b,0
+
+menu.disable.font.color.r,150
+menu.disable.font.color.g,150
+menu.disable.font.color.b,150
+
+menu.separator.color.r,150
+menu.separator.color.g,150
+menu.separator.color.b,150
+
+menu.background.alignment,centertop
+menu.foreground.alignment,centertop
+menu.sidebar.alignment,bottom
+
+menu.background.bitmap.filename,menu_background.png
+menu.foreground.bitmap.filename,menu_foreground.png
+menu.sidebar.bitmap.filename,menu_sidebar.png
+
+
+//--Dress-up Code
+//Clothing can be a little complicated, so I'd recommend reading the clothing page on the walkthrough before coming back here. I'll leave a bit of cindysuke's clothing code in here just as an example. If you're going to use these lines, make sure to uncomment them by removing the slashes.
+//As a brief overview, sakura (the main character), has a clothing item called "glasses" that's in a section called "face". The second character, kero, has two items, one called "glasses" in the "face" section and one called "hairpins" that's in the "hair" section. What you call these sections and items of clothing is up to you if you're actually doing this. Note the numbers after bindgroup though! We're going to be using them in just a second.
+
+//sakura.bindgroup51.name,face,glasses
+
+//kero.bindgroup55.name,face,glasses
+//kero.bindgroup57.name,hair,hairpins
+
+
+//Dress-Up Menu Organization
+//This sets up how the clothing appears in the dress-up menu. You can see the main character only has one item, while the second has two split by a dash. Note that it uses the same numbers defined above for each item.
+
+//sakura.menuitem0,51
+
+//kero.menuitem0,55
+//kero.menuitem1,-
+//kero.menuitem2,57
