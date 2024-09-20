@@ -1,5 +1,5 @@
 --Readme--
-HI!! I am making this ghost mainly for us to use! I may add more to this so more people could add to it besides us, but for now this is for us! 
+HI!!
 I am mainly making this for us to keep track of things as we delve into our own personal projects and etc. Please let me know any suggestions you have! 
 
 Features: 
@@ -7,7 +7,6 @@ Features:
 -Tell you weird facts
 -Remind you to drink water, eat a snack, etc (hopefully you will be able to set the intervals for that in a later update)
 -Be trapped inside your computer screen 
--Kiss timer??
 
 Sooner or later I will get the automatic updates figured out as well for this so you can update it and see all the changes and etc that I've added. 
 
