@@ -1,0 +1,79 @@
+
+
+v1.0.0.7-alpha //pre-release
+
+	NOTE: 
+
+		- 'TALKING DIALOGUE'
+		- * NARRATION ON WHAT OBIE IS DOING
+		- * (THOUGHTS FROM OBIE OR USER)
+
+
+	Updated Features:
+	
+		- More dialogue has been updated and added
+		
+			- Word.dic has more lists
+			
+			-Updated a bunch of dialogue in menu.dic
+			
+			-Updated a bunch of dialogue in commu.dic
+			
+			-Updated a bunch of dialogue in mouse.dic
+			
+			-Updated a little of dialogue in nameteach.dic more sassy
+			
+			- Updated literally one line in commu.dic for dialogue
+
+			- aitalk.dic has more dialogue options
+				- animations and bugs fixed with current dialogue
+				- HOURLY NOFITCATIONS FOR THE GHOST IS SET UPPPP 
+		
+		
+		- Surfaces has been updated
+			- surfaces changed to 'base' instead of 'overlay' to fix obie overlaying itself with running dialogue and animations
+			
+			- sufacetable has been COMPLETELY UPDATED and ALL surfaces has been grouped together and renamed 
+			
+			- Anger shaking animations has been added (\i[70]\i[80]\i[90]
+				-created also to have different intervals so \i[90] looks for violent compared to the other animations for \s[7] and \s[8]
+		
+			- \s[0] and \s[1] now have animations for turning to the otherside
+				- make sure when playing the animation to switch to the last surface or SSP will think that obie is in \s[0] when it is looking like it is in \s[1]
+					- ex: \0\s[0]\i[5]\s[1] - starts in surface 0 and ends in surface 1 with the animtion inbetween
+			
+			- \s[3] and \s[4] have moving animations moving to which why they face and then returning to the default coords (0.0)
+			
+		- String.dic has been updated and now customized to my liking
+			- captions edited and given extra captions to options
+			
+			- links in right-click menu updated and working with the ghost
+			
+		- Added this update log to keep track of updates for this ghost (ngl its fun to fill this out)
+		
+		- Updated surface restore with angry poses to have obie "breathe in and out" to calm down
+		
+		-Fixed typos in etc.dic 
+		
+	
+
+
+
+------
+
+v1.0.0.3-alpha //pre-release
+	
+	- Do note that I have no idea what I am doing with these verison numbers so it may be weird to see v1.0.0.3 rather that v1.0.9 or something that I was using before. 
+		-v1.0.0.3 is the starter verison that I FINALLY GOT THE NETWORK UPDATE TO ACTUALLY WORK AHA!! 
+	
+	What was created:
+		- Say a few dialogue points
+		- Surfaces and icons drawn and completed
+		- Empty recycle bin
+		- I touched pretty much everywhere and the basic for this ghost has been completed
+		- GitHub has been made for this ghost
+		- Blinking and floating animations has been made for sakura
+		- Candle animations figured out and created 
+		- Kero talking points and character menu has been removed
+		- Kero right-click menu customized 
+		

@@ -11,7 +11,8 @@
 
 //--OnCommunicate---------------------------------------------------------------
 
-//OnCommunicate is called when your ghost is either targeted by another ghost for a conversation, or when your ghost is targeting another ghost for conversation. There's no need to touch any of this.
+//OnCommunicate is called when your ghost is either targeted by another ghost for a conversation, or when your ghost is targeting another ghost for conversation. 
+//There's no need to touch any of this.
 OnCommunicate //dont touch
  {
 	if reference0 == "user" || reference0 == "User"
@@ -138,7 +139,7 @@ ReplyToGhost
              {
              "\0\s[0]'Hello, %(res_reference0).'\w8\8\n\n[half]'Hope you're doing well.'\e"
 
-             "\0\s[1]Hello, %(res_reference0).\e"
+             "\0\s[1]'Hello, %(res_reference0).'\e"
              }
        }
 }

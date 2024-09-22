@@ -5,7 +5,7 @@ OnTeachName
 {
 	if reference0 == "TEACHNAME" //ignore this
 		{
-		"\0\s[2]'What should I call you by?'\![open,inputbox,OnNameTeach,-1]\e"
+		"\0\s[2]'Since I am stuck here with you I guess I should learn your name.'\w8\w8\n\n'What is your name?'\![open,inputbox,OnNameTeach,-1]\e"
 		}
 	else
 		{
@@ -27,9 +27,11 @@ OnNameTeach
 	reference0 = REPLACE(reference0,".","") //removes periods
 	reference0 = REPLACE(reference0,"-","") //removes dashes
 	
-	//Those extra TOLOWER/REPLACE things up there basically clean up the user's input so you don't have to check for Girl, GIRL, girl, GiRl, etc. It'll make it much easier to check for any specific name, since you won't have to account for any edge cases. Note that the names you will be checking for should be in all lowercase, however.
+	//Those extra TOLOWER/REPLACE things up there basically clean up the user's input so you don't have to check for Girl, GIRL, girl, GiRl, etc. 
+	//It'll make it much easier to check for any specific name, since you won't have to account for any edge cases. 
+	//Note that the names you will be checking for should be in all lowercase, however.
 	
-	if reference0 == "Obie" //this checks to see if the user input any variation of the name "Girl". You may want to put in a check here if the user tries to name themselves the same name as your characters, since that could be confusing in dialogue. Or just a response to any kind of strange name, like Barack Obama or Cindy Crawford or Mike Nelson or Random Hajile. Or you can prevent certain offensive names if you don't want users using them. Really the power is yours here.
+	if reference0 == "Obie" 
 	{
 		"\0\s[0]That's my name which might be confusing between the two of us.\w5 Try that again.\![open,inputbox,OnNameTeach,-1]"
 	}
@@ -41,7 +43,7 @@ OnNameTeach
 	{
 		username = "USER"
 		
-		"\0\s[12]'You didn't put in anything... Weird...'\w8\0\s[0]I will call you USER.\e"
+		"\0\s[12]'You didn't put in anything\w8.\w8.w8.\w8\0\s[0]I will call you human either way.\w2 Formally you will be USER.'\e"
 	}
 	else //if the user put in something not specified above, ie a proper name the ghost can use. 
 	{
@@ -116,10 +118,10 @@ NameDone
 		firstboot = 0
 		
 		//This dialogue will display the first time the user puts in their name. 
-		"\0\s[2]'I have not heard of that name before....'\n\w2\s[0]'Interesting....'\n\w4'Well, thank you for telling me what I can call you by %(username).'\e"
+		"\0\s[2]'I have not heard of that name before....'\n\w2\s[0]'Interesting....'\e"
 	}
 	else
 	{
-	"\0\s[2]'I will now call you %(username).'\n[half]'Please let me know if you want me to call you something else instead.'\e"
+	"\0\s[2]'I will now call you %(username) until further notice.'\e"
 	}	
 }

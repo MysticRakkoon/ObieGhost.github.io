@@ -57,23 +57,6 @@ OnShellScaling
 OnFileDrop2
 */
 
-//You can guess at what each function does by its name for the most part. 
-//You can go through and find the functions that seem the most interesting, or the most likely, to appear and then just fill those out if you don't want to do all of them. 
-//Or, if you want to go full nuclear, you can just wipe this whole file and let SSP's default dialogue handle whenever these scenarios come up. 
-//It depends on what you have the energy for and how thorough you want to be.
-
-//This file IS long, but you'll only have to do it once! 
-//Probably. And again, you don't have to do all of it, or even most of it if you don't want to. 
-//Don't let this be a roadblock for you! It's basically bonus material! What matters is your aitalk file more than anything. 
-//You can always come back to this and fill it out over time once your ghost is already published. 
-//Don't get stuck here! I know it's easy to do so but don't let it happen to you! If you're getting stuck here just walk out, you can leave! lol. 
-//There's always aitalk, bootend, and menu to have more fun with, and that's the dialogue your user is going to see the most often.
-
-
-//If you see a big block of commented text you want to uncomment, highlight the text and then hit ctrl-shift-k in Notepad++ and that should uncomment it. Mostly this is intended for advanced users.
-
-
-
  //---- OnInstallBegin -------------------------------------------------------
  //OnInstallBegin is called when a file with an included install.txt is dropped on your ghost. 
  //This primarily means things like .nar files for other ghosts or .zip files containing balloons or shells for your ghosts. Primarily ghost-related things. Replace as you want.
@@ -239,7 +222,7 @@ OnVanished
  
 OnBIFFBegin
  {
-	"\0\s[0]'I will check.'\e"
+	"\0\s[1]'Fine, I will check.'\e"
  }
 
  
@@ -286,13 +269,13 @@ OnBIFFFailure
  	}
 	elseif reference0 == "defect" //If the information put into the POP menu is wrong.
  	{
- 		"\0\s[0]'The email account was not set up properly.\w8\n\n[half]It can be reset at the POP menu.'\w8\![open,configurationdialog]\e"
+ 		"\0\s[0]'The email account was not set up properly.'\w8\n\n[half]'It can be reset at the POP menu.'\w8\![open,configurationdialog]\e"
 		
 		//Note that this ends with \![open,configurationdialog]. This will open up the preferences menu I described above automatically. More on \! functions in the walkthrough. You can delete the \! tag here if you want to.
 	}
  	else //if there's some other kind of error.
 	{
-		"\0\s[0]'We can't connect to the account. \w8\n\n[half]The error returned is '%(reference[0])'.\e"
+		"\0\s[0]'I can't connect to the account.'\w8\n\n[half]'The error returned is '%(reference[0])'.\e"
 		
 		//reference0 here stores the error message the email server would have given the ghost, hopefully.
  	}
@@ -301,10 +284,8 @@ OnBIFFFailure
 
  //**** Network Update *****************************************************************
  //The following functions are for the Network Update of your ghost, where it will connect to your website, check for new files, and update itself. 
- //This is a handy feature, but tricky to set up. If you have no intention of using Network Update, you can disregard these, 
  //but it won't hurt to fill them out anyway just in case...More details about how to set up Network Update are in the walkthrough (http://www.ashido.com/ukagaka/).
  
- //Replace the dialogue in the next set of functions as appropriate. You can easily test these messages using the Developer panel. 
  //Go to Open at the bottom of it and choose one of the four Update Event options to simulate a Ghost's update process. 
  //I highly recommend doing this at LEAST once if you're going to use this feature to make sure it flows well.
 
@@ -328,7 +309,7 @@ OnUpdateReady
  
 	reference0++ //makes sure it starts at 1 instead of 0
 	
-    "\0\s[2]'There are %(reference0) new files.'\w8\e"
+    "\0\s[2]'There are %(reference0) new files.'\w8\n\n[half]\s[12]* It Sighs\n\n[half]\w8\w8'This may take a while.'\w8\e"
 	
 	//reference0 here storing the number of new files. You don't have to use it if you don't want to.
  }
@@ -341,17 +322,17 @@ OnUpdateComplete
  {
 	if reference0 == "none" //if the ghost had nothing to update with
  	{
- 		"\0\s[1]'There are no new files.'\e"
-		
+ 		"\0\s[1]'There are no new files to update with.'\n\n[half]'This felt like a waste of time.'\e"
 		"\0\s[2]'There is nothing to update.'\e"
 	}
  	else //if the ghost has updated successfully
 	{
-		"\0\s[5]'Update successful!'\s[1]\s[2]\e"
+		"\0\s[5]'The update was successful.\s[0]\s[2]\e"
+		"\0\s[2]'Looks like the update wad successful.\e"
  	}
 }
 
- //---- OnUpdateFailure -------------------------------------------------------------
+ //---- OnUpdateFailure --------------------------------------------------------
  //Error messages if the update process fails in some way.
  
 OnUpdateFailure
@@ -361,7 +342,7 @@ OnUpdateFailure
 	 
 	if reference0 == "timeout" //if the connection times out
  	{
- 		"\0\s[1]'The update connection has timed out.'\e"
+ 		"\0\s[11]'The update connection has timed out.'\e"
 	}
  	elseif reference0 == "md5 miss" //This is the final message displayed when you've run into an md5 error below at some point.
 	{
@@ -369,7 +350,7 @@ OnUpdateFailure
  	}
 	else //for other errors
  	{
- 		"\0\s[1]'The update could not be completed.\w8\0\s[0]The error is '%(reference0)'.'\e"
+ 		"\0\s[1]'The update could not be completed.'\w8\s[2]\s[0]\n\n\x'The error is '%(reference0).'\e"
 	}
  }
 
@@ -482,7 +463,7 @@ OnHeadlinesense.OnFind
 
 Select.Headline_Cancel
 {
-	"\0\s[0]Headline viewing complete.\e"
+	"\0\s[0]'Headline viewing complete.'\e"
 	//Actually I take that back, you can change this line of dialogue here for when you're done looking at a headline to something else if you want.
 }
 
@@ -491,8 +472,11 @@ Select.Headline_Cancel
  
 OnHeadlinesenseComplete
  {
-	"\0\s[0]No update. %(reference0).\e"
-	//reference0 here supposedly always stores the value no update? Again this isn't hugely clear from what I can see. Anyway, this dialogue has never come up for me while using a ghost, so perhaps someone else who runs into it can offer more clarity. For now, you can leave it as is, or write up something else in here if you like.
+	"\0\s[0]'No update. %(reference0).'\e"
+	//reference0 here supposedly always stores the value no update? 
+	//Again this isn't hugely clear from what I can see. 
+	//Anyway, this dialogue has never come up for me while using a ghost, so perhaps someone else who runs into it can offer more clarity. 
+	//For now, you can leave it as is, or write up something else in here if you like.
  }
 
  //---- OnHeadlinesenseFailure ---------------------------------------------------------
@@ -500,7 +484,7 @@ OnHeadlinesenseComplete
  
 OnHeadlinesenseFailure
   {
-	"\0\s[0]The feed can't updated.\w8\1\s[10]Why not?\w8\0\s[0]\n\n[half]" //This sets up an exchange between the two characters. The final part of the exchange continues below in the if statements.
+	"\0\s[2]'The feed can't updated.'\n\n[half]"
  	--
 	if reference0 == "can't download" //if they can't download the rss feed for some reason
  	{
@@ -515,13 +499,17 @@ OnHeadlinesenseFailure
 		"I don't know."
  	}
 	--
- 	"\e" //And here is the final /e, so you don't need to include it in the if statements above. Another one of the very rare cases this occurs.
-}
+ 	"\e" 
+  }
 
 
 //**** Ghost Creation and Updating ******************************************************
-//These next few are related to creating updates2.dau and .nar files for your ghosts. You'll want to at least make a .nar to distribute your ghost, and if you're going to be using Network Update, you'll also want to make updates2.dau as well. It's unlikely that anyone other than you will see these messages, but they can be fun to add some color to while you're developing. I gave Temmie some silly ones and they make me smile each time I update her.
-//Primarily, you will see these messages when you're creating your updates file or updating your ghost.nar file. More on this on the walkthrough page. However, you can drag and drop another ghost's folder onto them and they'll also create a nar for that as well, if for some reason you want to do that.
+//These next few are related to creating updates2.dau and .nar files for your ghosts. 
+//You'll want to at least make a .nar to distribute your ghost, and if you're going to be using Network Update, you'll also want to make updates2.dau as well. 
+//It's unlikely that anyone other than you will see these messages, but they can be fun to add some color to while you're developing. 
+//I gave Temmie some silly ones and they make me smile each time I update her.
+//Primarily, you will see these messages when you're creating your updates file or updating your ghost.nar file. 
+//More on this on the walkthrough page. However, you can drag and drop another ghost's folder onto them and they'll also create a nar for that as well, if for some reason you want to do that.
 
 
  //---- OnUpdatedataCreating -----------------------------------------------------------
@@ -589,7 +577,7 @@ OnSNTPCompare
  	else //if your clock doesn't match
 	{
 	//you can redo this top line up to the \n\n[half] part, but leave the \q options alone.
- 		"\0\s[0]Your clock doesn't match.\w6\nShould I fix it?\n\n[half]/
+ 		"\0\s[2]'Your clock doesn't match.\w6\nShould I fix it?'\n\n[half]/
 		\![*]\q[Fix it,OnSNTPEXECUTE]\n/
  		\![*]\q[Leave it alone,OnSNTPCANCEL]\e"
 	}
@@ -600,7 +588,7 @@ OnSNTPCompare
  
 OnSNTPEXECUTE
  {
-	"\0\s[0]'Your clock has been fixed.'\6\e"
+	"\0\s[5]'Your clock has been fixed.'\6\e"
  }
 
  //----　OnSNTPCANCEL ------------------------------------------------------------------
@@ -608,7 +596,7 @@ OnSNTPEXECUTE
  
 OnSNTPCANCEL
  {
-	"\0\s[0]'You're not going to change the clock?'\n\n[half]\w8'Well your funeral then.'\e"
+	"\0\s[2]'You're not going to change the clock?'\n\n[half]\w8'Well your funeral then.'\e"
  }
 
  //----　OnSNTPFailure ------------------------------------------------------------------
@@ -616,7 +604,7 @@ OnSNTPCANCEL
  
 OnSNTPFailure
  {
-	"\0\s[0]'The clock wasn't changed.\w8\0\s[1]Something went wrong.'\e"
+	"\0\s[2]'The clock wasn't changed.\w8\0\s[1]Something went wrong.'\e"
  }
 
 
@@ -633,11 +621,13 @@ OnDisplayChange
 
 
  //---- OnScreenSaverStart -------------------------------------------------------
- //This happens if your ghost is running when your screensaver starts up. I've never got this to trigger but I love this idea, and I feel like there's a way to do it I haven't figured out yet. So you can skip these for now if you want, but if I do ever get it working, I'll come back and make a note of it.
+ //This happens if your ghost is running when your screensaver starts up. 
+ //I've never got this to trigger but I love this idea, and I feel like there's a way to do it I haven't figured out yet. 
+ //So you can skip these for now if you want, but if I do ever get it working, I'll come back and make a note of it.
  
 OnScreenSaverStart
  {
-	"\0\s[0]'So I've been here alone for all this time?'\w8\w4\n\n[half]'Wow.'\w8\w8\w4'So long too that the screensaver is starting.'\e"
+	"\0\s[0]'So I've been here alone for all this time?'\w8\w4\n\n[half]'Wow.'\w8\w8\w4'So long that the screensaver is starting.'\e"
  }
 
  //---- OnScreenSaverEnd -------------------------------------------------------
@@ -691,12 +681,14 @@ OnBatteryLow
  
 OnBatteryCritical
 {
-	"\0\s[1]'The laptop's battery is critically low.'\n\n[half]'Please plug it in to charge.'\e"
+	"\0\s[1]'Your laptop's battery is critically low.'\n\n[half]'Please plug it in to charge.'\e"
 }
  
 //--OnBatteryNotify--------------------------------------------------------------------
-//This I believe checks to see if your laptop is plugged in or not. Originally this bit of code was commented out, so I suspect it may not work. It may need a plug-in of some sort. Either way, you can delete it or fill it out as you like.
-//Actually investigating this, leaving this in makes it so the ghost updates you about whether or not your computer is plugged-in constantly, which makes no sense for desktops. No doubt why it was commented out. You can delete it or just leave it be.
+//This I believe checks to see if your laptop is plugged in or not. 
+//Originally this bit of code was commented out, so I suspect it may not work. It may need a plug-in of some sort. Either way, you can delete it or fill it out as you like.
+//Actually investigating this, leaving this in makes it so the ghost updates you about whether or not your computer is plugged-in constantly, which makes no sense for desktops. 
+//No doubt why it was commented out. You can delete it or just leave it be.
 
 /*
 OnBatteryNotify
@@ -737,7 +729,8 @@ OnShellScaling
 	elseif reference0 == 50 //this is 50%. You can add any percentage that's listed under shell scaling if you want using more elseifs.
 	{
 		"\0\s[0]'....'\e"
-		"\0\s[0]\i[25]'Everything looks so big\w3.\w3.\w3.'\w8\n\n'I feel so tiny\w2.\w2.\w2.'\e"
+		"\0\s[0]\i[25]'Everything looks so big\w3.\w3.\w3.'\e"
+		"'I feel so tiny\w2.\w2.\w2.\w8 Weird.'\e"
 	}
 }
 
@@ -770,7 +763,7 @@ OnFileDrop2
 		}
 		others //Any other file format. As a note here, if you drop something ghost-related on them that does not have an install.txt, then they won't install it and will just say this response. If you are testing your balloon or nar files and you get this response instead of a proper installation, you should check and make sure you have an install.txt in the file!
 		{
-			"\0\s[5]This is %(_filename)%(_fileext).\e"
+			"\0\s[5]'This is %(_filename)%(_fileext).'\e"
 		}
 	}
 }
@@ -779,7 +772,7 @@ OnFileDrop2
 
 Select.SetWallpaper_0
 {
-	"\![set,wallpaper,%(Wallpaperfile),center]\0\s[0]The image is centered.\e"
+	"\![set,wallpaper,%(Wallpaperfile),center]\0\s[0]'The image is centered.'\e"
 }
 Select.SetWallpaper_1
 {

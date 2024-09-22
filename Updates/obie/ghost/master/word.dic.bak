@@ -4,7 +4,7 @@
 //They are technically functions and can do many things, but this file is mostly an organizational tool for storing lists you may use.
 
 //For the purposes of this file, an envelope is a list that you can populate with items, and this list can be called later during dialogue with the %(name) format. 
-//If you've read the walkthrough or gone through any of the other .dic files, you've probably seen these before. 
+
 //%(username) is one, which displays the user's name, 
 //and %(heshe) is another, which displays the right pronoun depending on what the user selected in bootend.dic or menu.dic. 
 //Other ones include %(passmin), which shows how many minutes have passed since the ghost was started, 
@@ -27,9 +27,10 @@ openforhowlong
 
 folderdialogue
 {
-	"\0\s[5]*It looks like it is looking through something...\w8\w8\w8\n\n[half]\s[0]'So many interesting folders you have there.'"
+	"\0\s[5]* It looks like it is looking through something...\w8\w8\s[2]\i[22]\w8\n\n[half]'So many interesting folders you have there.'"
 	"\0\s[2]\w8\w8\w8\w6\s[1]\i[12]\w8\w8'I can see your folders....'\n\n[half]\w8\w8\w8\w8\w6'I wonder what's in there....'\s[2]\w8\w8\w6\n\n[half]'...Anything in there for me maybe?'"
 	"\0\s[2]'Your folders look tasty...\w4\w2 Can I eat one?"
+	"\0\s[2]\s[6]'The %(usersfolder) looks especially tasty\w6.\w6.\w6.\w6.'\n\n[half]'May I?'\e"
 }
 
 obielocations
@@ -38,13 +39,6 @@ obielocations
 	"in the ocean, in the deepest part of a forest\s[5]\n\n[half]\w1-well not deep enough as a village started to by built around me"
 	"in one of the deepest forests"
 }
-
-//What can you use this kind of envelope for? You can store tons of random information to keep your ghost's dialogue varied! 
-//You can store various cities you like in %(city), musicians you like in %(musicians), places your ghost has been in %(places), 
-//food you like in %(food), movies you like in %(movie), fandoms you like in %(fandom), characters you like in %(fandomcharacter), celebrities you like under %(celebrity) 
-//or friends of yours in %(friends) or bnfs in %(bnfs), folders on your computer under %(folders), 
-//Pokemon you like under %(pokemon), insults under %(insult), swear words under %(swearword) which could potentially be hilarious, just about anything! 
-//You can make lists of absolutely anything to use with dialogue for your ghost! This .dic file is only limited by your imagination!
 
 //Not only that, but you can put an envelope IN an envelope. Here's another example.
 
@@ -61,10 +55,6 @@ obielocations
 //And if this doesn't give you ideas, you can ignore this file, since nothing in it will show up unless you write it into the dialogue. You can add or take away as many items as you want from each list.
 
 		//*********************Advanced User Info*******************************
-	  //These text boxes are meant for those who have an interest in expanding or using more complicated functions in their ghost. 
-	  //Also for my own reference in the future since I plan on using this template too, haha. 
-	  //If you have no interest in any of this and just want to keep things as simple as possible, feel free to skip these boxes.
-	  
 	  //Because these are basically their own functions, you can do other things with them as well as display dialogue. 
 	  //You can add if/else checks, run other functions, have pools of alternate dialogue... the possibilities are really endless.
 	  
@@ -101,7 +91,10 @@ obielocations
 	//So in dialogue, to change fonts I'd just have to go "%(p)HEY THERE!%(d)" to change fonts back and forth quickly. These kind of shortcuts can be very useful.
 	
 	//Another way to use envelopes is to store multiple poses for SurfaceRestore in aitalk.dic. Gaster for example has several neutral idle poses, but also several poses for when he's scared. So I can make an envelope like
-	
+		//And have him randomly pick one whenever I use %(scared) in dialogue. This can be an easy way to vary certain poses without having to manually put them in one at a time, and have some variety when your ghost goes back to its neutral pose in SurfaceRestore.
+		
+	  //***********************************************************************
+
 angrypose
 {
 	"\0\s[7]"
@@ -109,51 +102,32 @@ angrypose
 	"\0\s[9]"
 }
 	
-	//And have him randomly pick one whenever I use %(scared) in dialogue. This can be an easy way to vary certain poses without having to manually put them in one at a time, and have some variety when your ghost goes back to its neutral pose in SurfaceRestore.
-		
-	  //***********************************************************************
-
-blanklist
+weirdofferingitem
 {
-	"List object 1"
-	"List object 2"
-	"List object 3"
-	"List object 4"
-	"List object 5"
+	"Pineapples at the cliff one time.'\w8\w2\n\n[half]'MULTIPLE Pineapples.\w7.\w7.'\w7\w6'Yeah I don't know why either.'"
+	"a stuffed teddy bear once.'\w8\s[1]\n\n[half]'...It's still there, frozen in ice...'"
+	"a cup of juice.'\n\n[half]'The entire cup was tasty.'"
+	"flowers.'\w8\w8\w8'Not sure how they even were brought up there in good condition with the fridged temperatures'"
+	"\s[7]a goat.'\w8\w8\w8\w7\w7\w8\n\n[half]\s[8]\i[80]'The DAMNED THING is still alive and thriving on eating MY offerings.'"
 }
 
-blanklist2
+offeringitems
 {
-	"List object 1"
-	"List object 2"
-	"List object 3"
-	"List object 4"
-	"List object 5"
-	"List object 6"
-	"List object 7"
-	"List object 8"
-}
-
-blanklist3
-{
-	"List object 1"
-	"List object 2"
-	"List object 3"
-	"List object 4"
-}
-
-blanklist4
-{
-	"List object 1"
-	"List object 2"
+	"that teddy bear"
+	"\s[7]\i[70]THAT GOAT"
+	"that cat"
+	"the sented incense"
+	"those gloves"
+	"the gold"
+	"the cup of milk"
 }
 
 usersfolder
 {
-	"%(username)'s Recycle Bin"
-	"%(username)'s Document folder"
-	"%(username)'s Programs folder"
-	"%(username)'s Pictures folder"
+	"Recycle Bin"
+	"Document folder"
+	"Programs folder"
+	"Pictures folder"
 }
 
 

@@ -38,16 +38,17 @@ MouseMoveSakura
 				"\0\s[2]*As you pet it you can feel vibrations under it's metal surface.\n\n'......'\e"
 				"\0\s[2]*You feel the vibrating metal that covers Obie.\n'If only you could feel me actually... I wonder what would be our size difference then!'\n\n[half]\s[1]*A chuckling rumble vibration comes from it.\e"
 				"\0\s[1]'That feels nice. It's been awhile since a sentient being touched me.'\e"
-				"\0\s[5]'Don't you ever get tired of petting me!?'\e"
+				"\0\s[2]\i[24]'Don't you ever get tired of petting me!?'\e"
 				"\0\s[11]'Not right now.'\e"
  			}
  			elseif reference4 == "NoPets"
  			{
 				"\0\s[7]'Do you know how to keep your hands to yourself?'\e"
-				"\0\s[7]'Do you know how to keep your hands to yourself?'\e"
+				"\0\s[7]\i[70]'Do you know how to keep your hands to yourself?'\e"
  				"\0\s[8]*It doesn't seem to be a good idea to pet it right now.\n\n\_q'S T O P.'\e"
- 				"\0\s[9]\_q'DO NOT EVEN TRY TO TOUCH ME RIGHT NOW.'\e"
+ 				"\0\s[9]\i[90]\_q'DO NOT EVEN TRY TO TOUCH ME RIGHT NOW.'\e"
 				"\0\s[9]'W-WHY DO YOU FEEL THE NEED TO INFURIATING ME?!'\e"
+				"\0\s[9]\i[90]'ENOUGH!'"
  			}
 			
  		}
@@ -112,17 +113,14 @@ OnMouseDoubleClick //DONT TOUCH
 
 
  //---- MouseDoubleClickSakura ----------------------------------------------------------
- //Like the petting animation above, this is the reactions they have to being double clicked. These also rely on the collisions you set up in surfaces.txt! This set is specifically for the main character, as indicated by the Sakura in the name again.
+ //Like the petting animation above, this is the reactions they have to being double clicked. 
+ //These also rely on the collisions you set up in surfaces.txt! This set is specifically for the main character, as indicated by the Sakura in the name again.
  
  //*********************Advanced User Info*******************************
- //As a note, double clicking on a certain area of your ghost doesn't have to be the user hitting them. You could instead set up a collision for a piece of clothing, and then have the character talk about that bit of clothing when it's double clicked, for example. One of Smoker's double clicks gives her a high-five when she's in a certain pose. Maybe double clicking is patting them, or pointing behind them, or tapping them, or any number of things. You can be creative here with how they respond depending on what areas you've set up as collisions!
- 
- //If you don't want your character to be hittable at all, you can just delete everything in MouseDoubleClickSakura except OpenSakuraMenu. So it'd look like
- 
- //MouseDoubleClickSakura
- //{
- //OpenSakuraMenu
- //}
+ //As a note, double clicking on a certain area of your ghost doesn't have to be the user hitting them. 
+ //You could instead set up a collision for a piece of clothing, and then have the character talk about that bit of clothing when it's double clicked, for example. 
+ //One of Smoker's double clicks gives her a high-five when she's in a certain pose. Maybe double clicking is patting them, or pointing behind them, or tapping them, 
+ //or any number of things. You can be creative here with how they respond depending on what areas you've set up as collisions!
  
  //That's all there is to it. This method also applies to the secondary character, Kero, below this set.
  //***********************************************************************

@@ -286,13 +286,13 @@ OnBIFFFailure
  	}
 	elseif reference0 == "defect" //If the information put into the POP menu is wrong.
  	{
- 		"\0\s[0]'The email account was not set up properly.\w8\n\n[half]It can be reset at the POP menu.'\w8\![open,configurationdialog]\e"
+ 		"\0\s[0]'The email account was not set up properly.'\w8\n\n[half]'It can be reset at the POP menu.'\w8\![open,configurationdialog]\e"
 		
 		//Note that this ends with \![open,configurationdialog]. This will open up the preferences menu I described above automatically. More on \! functions in the walkthrough. You can delete the \! tag here if you want to.
 	}
  	else //if there's some other kind of error.
 	{
-		"\0\s[0]'We can't connect to the account.\w8\n\n[half]The error returned is '%(reference[0])'.\e"
+		"\0\s[0]'I can't connect to the account.'\w8\n\n[half]'The error returned is '%(reference[0])'.\e"
 		
 		//reference0 here stores the error message the email server would have given the ghost, hopefully.
  	}
@@ -328,7 +328,7 @@ OnUpdateReady
  
 	reference0++ //makes sure it starts at 1 instead of 0
 	
-    "\0\s[2]'There are %(reference0) new files.'\w8\e"
+    "\0\s[2]'There are %(reference0) new files.'\w8\n\n[half]\s[12]* It Sighs\n\n[half]\w8\w8'This may take a while.'\w8\e"
 	
 	//reference0 here storing the number of new files. You don't have to use it if you don't want to.
  }
@@ -341,17 +341,17 @@ OnUpdateComplete
  {
 	if reference0 == "none" //if the ghost had nothing to update with
  	{
- 		"\0\s[1]'There are no new files.'\e"
-		
+ 		"\0\s[1]'There are no new files to update with.'\n\n[half]'This felt like a waste of time.'\e"
 		"\0\s[2]'There is nothing to update.'\e"
 	}
  	else //if the ghost has updated successfully
 	{
-		"\0\s[5]'Update successful!'\s[1]\s[2]\e"
+		"\0\s[5]'The update was successful.\s[0]\s[2]\e"
+		"\0\s[2]'Looks like the update wad successful.\e"
  	}
 }
 
- //---- OnUpdateFailure -------------------------------------------------------------
+ //---- OnUpdateFailure --------------------------------------------------------
  //Error messages if the update process fails in some way.
  
 OnUpdateFailure
@@ -361,7 +361,7 @@ OnUpdateFailure
 	 
 	if reference0 == "timeout" //if the connection times out
  	{
- 		"\0\s[1]'The update connection has timed out.'\e"
+ 		"\0\s[11]'The update connection has timed out.'\e"
 	}
  	elseif reference0 == "md5 miss" //This is the final message displayed when you've run into an md5 error below at some point.
 	{
@@ -369,7 +369,7 @@ OnUpdateFailure
  	}
 	else //for other errors
  	{
- 		"\0\s[1]'The update could not be completed.\w8\0\s[0]The error is '%(reference0)'.'\e"
+ 		"\0\s[1]'The update could not be completed.'\w8\s[2]\s[0]\n\n\x'The error is '%(reference0).'\e"
 	}
  }
 
@@ -482,7 +482,7 @@ OnHeadlinesense.OnFind
 
 Select.Headline_Cancel
 {
-	"\0\s[0]Headline viewing complete.\e"
+	"\0\s[0]'Headline viewing complete.'\e"
 	//Actually I take that back, you can change this line of dialogue here for when you're done looking at a headline to something else if you want.
 }
 
@@ -491,8 +491,11 @@ Select.Headline_Cancel
  
 OnHeadlinesenseComplete
  {
-	"\0\s[0]No update. %(reference0).\e"
-	//reference0 here supposedly always stores the value no update? Again this isn't hugely clear from what I can see. Anyway, this dialogue has never come up for me while using a ghost, so perhaps someone else who runs into it can offer more clarity. For now, you can leave it as is, or write up something else in here if you like.
+	"\0\s[0]'No update. %(reference0).'\e"
+	//reference0 here supposedly always stores the value no update? 
+	//Again this isn't hugely clear from what I can see. 
+	//Anyway, this dialogue has never come up for me while using a ghost, so perhaps someone else who runs into it can offer more clarity. 
+	//For now, you can leave it as is, or write up something else in here if you like.
  }
 
  //---- OnHeadlinesenseFailure ---------------------------------------------------------
@@ -500,7 +503,7 @@ OnHeadlinesenseComplete
  
 OnHeadlinesenseFailure
   {
-	"\0\s[0]The feed can't updated.\w8\1\s[10]Why not?\w8\0\s[0]\n\n[half]" //This sets up an exchange between the two characters. The final part of the exchange continues below in the if statements.
+	"\0\s[2]'The feed can't updated.'\n\n[half]"
  	--
 	if reference0 == "can't download" //if they can't download the rss feed for some reason
  	{
@@ -515,13 +518,17 @@ OnHeadlinesenseFailure
 		"I don't know."
  	}
 	--
- 	"\e" //And here is the final /e, so you don't need to include it in the if statements above. Another one of the very rare cases this occurs.
-}
+ 	"\e" 
+  }
 
 
 //**** Ghost Creation and Updating ******************************************************
-//These next few are related to creating updates2.dau and .nar files for your ghosts. You'll want to at least make a .nar to distribute your ghost, and if you're going to be using Network Update, you'll also want to make updates2.dau as well. It's unlikely that anyone other than you will see these messages, but they can be fun to add some color to while you're developing. I gave Temmie some silly ones and they make me smile each time I update her.
-//Primarily, you will see these messages when you're creating your updates file or updating your ghost.nar file. More on this on the walkthrough page. However, you can drag and drop another ghost's folder onto them and they'll also create a nar for that as well, if for some reason you want to do that.
+//These next few are related to creating updates2.dau and .nar files for your ghosts. 
+//You'll want to at least make a .nar to distribute your ghost, and if you're going to be using Network Update, you'll also want to make updates2.dau as well. 
+//It's unlikely that anyone other than you will see these messages, but they can be fun to add some color to while you're developing. 
+//I gave Temmie some silly ones and they make me smile each time I update her.
+//Primarily, you will see these messages when you're creating your updates file or updating your ghost.nar file. 
+//More on this on the walkthrough page. However, you can drag and drop another ghost's folder onto them and they'll also create a nar for that as well, if for some reason you want to do that.
 
 
  //---- OnUpdatedataCreating -----------------------------------------------------------
@@ -589,7 +596,7 @@ OnSNTPCompare
  	else //if your clock doesn't match
 	{
 	//you can redo this top line up to the \n\n[half] part, but leave the \q options alone.
- 		"\0\s[0]Your clock doesn't match.\w6\nShould I fix it?\n\n[half]/
+ 		"\0\s[2]'Your clock doesn't match.\w6\nShould I fix it?'\n\n[half]/
 		\![*]\q[Fix it,OnSNTPEXECUTE]\n/
  		\![*]\q[Leave it alone,OnSNTPCANCEL]\e"
 	}
@@ -600,7 +607,7 @@ OnSNTPCompare
  
 OnSNTPEXECUTE
  {
-	"\0\s[0]'Your clock has been fixed.'\6\e"
+	"\0\s[5]'Your clock has been fixed.'\6\e"
  }
 
  //----　OnSNTPCANCEL ------------------------------------------------------------------
@@ -608,7 +615,7 @@ OnSNTPEXECUTE
  
 OnSNTPCANCEL
  {
-	"\0\s[0]'You're not going to change the clock?'\n\n[half]\w8'Well your funeral then.'\e"
+	"\0\s[2]'You're not going to change the clock?'\n\n[half]\w8'Well your funeral then.'\e"
  }
 
  //----　OnSNTPFailure ------------------------------------------------------------------
@@ -616,7 +623,7 @@ OnSNTPCANCEL
  
 OnSNTPFailure
  {
-	"\0\s[0]'The clock wasn't changed.\w8\0\s[1]Something went wrong.'\e"
+	"\0\s[2]'The clock wasn't changed.\w8\0\s[1]Something went wrong.'\e"
  }
 
 
@@ -633,11 +640,13 @@ OnDisplayChange
 
 
  //---- OnScreenSaverStart -------------------------------------------------------
- //This happens if your ghost is running when your screensaver starts up. I've never got this to trigger but I love this idea, and I feel like there's a way to do it I haven't figured out yet. So you can skip these for now if you want, but if I do ever get it working, I'll come back and make a note of it.
+ //This happens if your ghost is running when your screensaver starts up. 
+ //I've never got this to trigger but I love this idea, and I feel like there's a way to do it I haven't figured out yet. 
+ //So you can skip these for now if you want, but if I do ever get it working, I'll come back and make a note of it.
  
 OnScreenSaverStart
  {
-	"\0\s[0]'So I've been here alone for all this time?'\w8\w4\n\n[half]'Wow.'\w8\w8\w4'So long too that the screensaver is starting.'\e"
+	"\0\s[0]'So I've been here alone for all this time?'\w8\w4\n\n[half]'Wow.'\w8\w8\w4'So long that the screensaver is starting.'\e"
  }
 
  //---- OnScreenSaverEnd -------------------------------------------------------
@@ -691,12 +700,14 @@ OnBatteryLow
  
 OnBatteryCritical
 {
-	"\0\s[1]'The laptop's battery is critically low.'\n\n[half]'Please plug it in to charge.'\e"
+	"\0\s[1]'Your laptop's battery is critically low.'\n\n[half]'Please plug it in to charge.'\e"
 }
  
 //--OnBatteryNotify--------------------------------------------------------------------
-//This I believe checks to see if your laptop is plugged in or not. Originally this bit of code was commented out, so I suspect it may not work. It may need a plug-in of some sort. Either way, you can delete it or fill it out as you like.
-//Actually investigating this, leaving this in makes it so the ghost updates you about whether or not your computer is plugged-in constantly, which makes no sense for desktops. No doubt why it was commented out. You can delete it or just leave it be.
+//This I believe checks to see if your laptop is plugged in or not. 
+//Originally this bit of code was commented out, so I suspect it may not work. It may need a plug-in of some sort. Either way, you can delete it or fill it out as you like.
+//Actually investigating this, leaving this in makes it so the ghost updates you about whether or not your computer is plugged-in constantly, which makes no sense for desktops. 
+//No doubt why it was commented out. You can delete it or just leave it be.
 
 /*
 OnBatteryNotify
@@ -737,7 +748,8 @@ OnShellScaling
 	elseif reference0 == 50 //this is 50%. You can add any percentage that's listed under shell scaling if you want using more elseifs.
 	{
 		"\0\s[0]'....'\e"
-		"\0\s[0]\i[25]'Everything looks so big\w3.\w3.\w3.'\w8\n\n'I feel so tiny\w2.\w2.\w2.'\e"
+		"\0\s[0]\i[25]'Everything looks so big\w3.\w3.\w3.'\e"
+		"'I feel so tiny\w2.\w2.\w2.\w8 Weird.'\e"
 	}
 }
 

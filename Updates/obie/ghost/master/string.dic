@@ -3,13 +3,10 @@
 ///////// written by umeici.
 
 
-//---------------------------Strings--------------------------
+//---------------------------Strings-----------------------------------------------------------------------------------------------
 
 //Anyway, string.dic has to do with the right-click SSP menu, specifically the captions for the menu options. 
 //This is VERY IMPORTANT if you're going to set up the Network Update for your ghost! 
-//Otherwise this is just an easy place to customize your ghost's menu to your tastes. 
-//You don't HAVE to if you don't want to. The only thing in here you really need to change is the network update information, if you're using it.
-
 //Note also here that lines do not end with \e here. This is because the ghost isn't speaking these lines, they're just being used in the right-click menu.
 
 
@@ -23,9 +20,8 @@ On_username
 
 //---- Network Update URL ----------------------------------------------
 //This is the URL where your ghost will look for updates. If you're setting up Network Updates YOU MUST change this to point at the right directory! 
-//Otherwise your ghost will not update properly! If you're not going to use the Network Update feature, just leave this section as it is or delete it, it should be fine.
 
-On_homeurl
+On_homeurl//dontouchthis
 {
 	"https://raw.githubusercontent.com/MysticRakkoon/ObieGhost.github.io/refs/heads/main/Updates/obie/"
 }
@@ -41,7 +37,7 @@ On_recommendrootbutton.caption
 
 
 //---- Top Menu Option Websites -----------------------------------------------------
-//These are the websites listed under that button we just named up there. You can put whatever sites you want in here. I'll actually link to some real sites here to be helpful. Feel free to replace these with the sites you like instead. Pay close attention to the formatting that follows!
+//These are the websites listed under that button we just named up there. 
 
 On_sakura.recommendsites
  {
@@ -54,66 +50,51 @@ On_sakura.recommendsites
 	"%ASC(1)http://ssp.shillest.net/%ASC(2)"
 	--
 	
-	"Crow + SSP Reference (J)"
+	"Crow + SSP Reference"
 	--
 	"%ASC(1)http://crow.aqrs.jp/reference/all/index.html%ASC(2)"
 	--
 	
-	"Ghost Documentation (J)"
+	"Ghost Documentation"
 	--
 	"%ASC(1)http://usada.sakura.vg/contents/specification.html%ASC(2)"
 	--
 	
-	"Disc-2 (J)"
+	"Disc-2"
 	--
 	"%ASC(1)http://disc2.s56.xrea.com/%ASC(2)"
 	
-	"UKADOC Project Wiki (J)"
+	"UKADOC Project Wiki"
 	--
 	"%ASC(1)http://ssp.shillest.net/ukadoc/manual/index.html/%ASC(2)"
  }
  
 //---- The second option from the top's caption -----------------------------------------
-//This is the name of the second option in that list. You can change this to whatever you want, or even put in multiple names. If you do more than one, the names will switch randomly.
+//This is the name of the second option in that list. You can change this to whatever you want, or even put in multiple names. 
+//If you do more than one, the names will switch randomly.
 
 On_portalrootbutton.caption
  {
 	"About This Ghost"
-	"Obie Websites"
  }
 
  //---- Websites in the Second Option --------------------------------------------------
  //These are the websites listed under that second button we just named up there. Like with the other option, these are the websites you want to link to. 
- //You can put whatever sites you want in here. Pay close attention to the formatting that follows!
  
 On_sakura.portalsites
  {
- 	"Site Name 1"
+ 	"Ghost Github"
 	--
-	"%ASC(1)http://somesite.com/%ASC(2)"
+	"%ASC(1)https://github.com/MysticRakkoon/ObieGhost.github.io/tree/main%ASC(2)"
+	--	
+	"The Creators' Twitter"
+	"The Authors' Twitter"
 	--
-	//Here, you'll notice that there are two names, a --, then a website bracketed by %ASC(1) and %ASC(2). What this will do is randomly chose between those two site names for the link. So if you open the menu, maybe it will say Site Name 1, or maybe it will say Site Name 1 Alternate. Honestly I find links changing names without warning kind of confusing, but maybe some find it amusing, idk. Put the address of the site you want to link to between the two ASC tags.
-	
-	"Site Name 2"
+	"%ASC(1)https://x.com/MysticRakkoon%ASC(2)"
+	--	
+	"DND World Creator That Inspired Obie"
 	--
-	"%ASC(1)http://www.anothersite.org/%ASC(2)"
-	--
-	
-	//If you want to keep things simple, you can just give each website one name like so.
-	
-	"Site Name 3"
-	--
-	"%ASC(1)http://www.thirdsite.com/%ASC(2)"
-	--
-	"Site Name 4"
-	--
-	"%ASC(1)http://www.fourthsite.com/%ASC(2)"
-	--
-	"Site Name 5"
-	--
-	"%ASC(1)http://www.fifthsite.com/%ASC(2)"
-	
-	//You get the idea. You can add more links or take them away as you like following this basic formula.
+	"%ASC(1)https://x.com/AcrossWorldsRPG%ASC(2)"
  }
 
  
@@ -145,10 +126,11 @@ On_sakura.portalsites
 On_updatebutton.caption
  {
 	"Update Menu"
+	"Update"
+	"Check for Updates"
 }
 
 //---- Dress-up Menu Caption ----------------------------------------------------------
-//What it will say on the menu for Dress-Up.
 
 On_dressuprootbutton.caption
 {
@@ -163,12 +145,9 @@ On_headlinesenserootbutton.caption
 	"Headlines + RSS Feeds"
 }
 
- //---- Readme Caption -------------------------------------------------------
- //What the menu displays for the readme file link under Information.
- 
+ //---- Readme Caption ------------------------------------------------------- 
 On_readmebutton.caption
  {
-	"GHOST READ ME FILE"
 	"readme.txt"
 	"Obie Manual"
  }
@@ -178,6 +157,8 @@ On_readmebutton.caption
 On_vanishbutton.caption
  {
 	"Uninstall This Ghost"
+	"Uninstall?"
+	"Uninstall"
 }
 
 //---- Shell Caption -----------------------------------------------------
@@ -185,6 +166,7 @@ On_vanishbutton.caption
 On_shellrootbutton.caption
  {
 	"Change Shell"
+	"Change Skin"
 }
 
 //---- Change Ghost Caption -----------------------------------------------------
@@ -207,6 +189,7 @@ On_callghostrootbutton.caption
 On_quitbutton.caption
  {
 	"Quit SSP"
+	"Quit"
 }
 
 

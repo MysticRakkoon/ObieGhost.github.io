@@ -4,9 +4,9 @@
 //Some ghosts have a feature where they will speak to your ghost, usually saying "hello" or "hi" or something like that. 
 //This file mostly handles how your ghost will reply when another ghost talks to them like that. While not every ghost has that functionality, you might as well put in one line or two just in case. 
 
-//If you're interested in having your ghost speak to other ghosts through a menu option or something like that, I think that's a bit outside the scope of this template for now, but I'm sure I'll eventually write up how to do it on the walkthrough page in one of the coding sections.
-
-//Some of you may be wondering about the parts for talking to the user. I can't track this down anywhere in the files, and I think it refers to a deprecated functionality to have the user teach your ghost things via the teach box. Basically just ignore it, it will probably never come up.
+//Some of you may be wondering about the parts for talking to the user. 
+//I can't track this down anywhere in the files, and I think it refers to a deprecated functionality to have the user teach your ghost things via the teach box. 
+//Basically just ignore it, it will probably never come up.
 
 
 //--OnCommunicate---------------------------------------------------------------
@@ -137,7 +137,7 @@ ReplyToGhost
              AlreadyResponded = 1 //setting a flag to say they've responded once already
 
              {
-             "\0\s[0]'Hello, %(res_reference0).'\w8\8\n\n[half]'Hope you're doing well.'\e"
+             "\0\s[0]'Hello, %(res_reference0).'\w8\8\n\n[half]'Are you stuck here too?'\e"
 
              "\0\s[1]'Hello, %(res_reference0).'\e"
              }

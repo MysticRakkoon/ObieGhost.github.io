@@ -117,9 +117,14 @@ RandomTalk : nonoverlap_pool
 	"%(folderdialogue)\e"
 	"\0\s[11]'You're kind to spirit me away for a little break, human.'\w5\n\n[half]'We all can use a break sometimes.'\e"
 	"\0\s[2]\s[12]* It's humming a tune.'\e"
-	"\0\s[0]* Is it watching you...? \n\w5* It's hard to tell...\w8\i[2]\w8\n\n[half]* Oop yes it was!\e"
-
-
+	"\0\s[0]* (Is it watching you...?) \n\w5* (It's hard to tell...)\w8\i[2]\w8\n\n[half]* (Oop yes it was!)\e"
+	"\0\s[1]* It doesn't say anything, the silence must not bother it.\e"
+	"\0\s[1]'I wonder what offerings those humans have left for me.'\n\n[half]\w8\s[6]'Hopefully something tasty.'\e"
+	"\0\s[2]\i[24]\i[24]\i[24]\e"
+	"\0\s[5]'I wonder if %(offeringitems) is still at my cliff.'\e"
+	"\0\s[5]'I have been here for %(passmin) minutes.'\e"
+	"\0\s[2]\i[22]\w8\w8\w8\w8\w8* (Is it trying to watch and learn from you?)"
+	
 	//"\1\s[10]Here we'll use the envelope 'internalenvelope' to show an envelop containing another envelope.\w8\0\s[0]%(internalenvelope).\e"
 	//Here's an example using the internal envelope I mentioned in word.dic. Basically, a function within a function. More on that kind of thing on the coding page of the walkthrough.
 	
@@ -351,49 +356,41 @@ OnMinuteChange //This is what will trigger time-based dialogue for your Ghost.
  {
 	HourCheck //checks to see if an hour has passed, ignore it
 	--
- 	// if minute == 0 //These ifs will check what time it is. Here, it's seeing if the minute equals zero...
-	// {
- 		// if hour == 12 //And the hour equals 12, meaning it's noon. You can change this to some other hour if you want.
-		// {
- 			// "\0\s[0]It's noon.\w8\1\s[15]Let's have a showdown!\w8\0\n\n[half]\s[9]There are no corrals here, dude.\e"
-			// //Replace with appropriate dialogue as you want.
-		// }
- 		// elseif hour == 0 //If the hour is zero, aka midnight. Again, you can change this to whatever hour you want to check for. This section is flexible! You can also add more elseifs if you want to check for other hours.
-		// {
- 			// "\0\s[0]It's midnight!\e"
- 			// "\0\s[0]This is another bit of dialogue for midnight.\w8\1\s[10]BooooOoooOOOooOOOOo.\e"
- 			// "\0\s[0]This is the third bit of dialogue for midnight.\e"
-			// //Then replace the dialogue with what's appropriate.
-		// }
-		// else
-		// {
-			// "\0\s[0]It's %(hour12)'o clock.\e"
-			// //%(hour12) stores the time. This is a general top of the hour notification. I personally like this because it helps me keep track of time when I've been working on something, so when a ghost is all "Hey it's 3 o clock" I can be like woah really when did that happen. If you think this is annoying though, you can just delete this bit of dialogue to leave this else statement blank, or leave "" in here instead.
-		// }
-	// }
-	// //You can also check for more specific times! For example...
-	// elseif hour == 23 && minute == 55 //this checks to see if the hour is 23 and the minutes are at 55... essentially, 11:55 pm.
-	// {
-		// "\0\s[0]5 minutes to midnight.\e"
-		// //Replace with what you like!
-	// }
-	// elseif hour == 7 && minute == 30 && weekday == 0 //Here, it's checking for a specific time on a specific day. You can add things to your time checks just like this by using the AND operator, && (more about operators at the walkthrough page). This adds up to 7:30 am, Sunday. If you have a favorite TV program on at some time, you could have your ghost comment on when it comes on like this.
-	// {			
-		// "\0\s[0]It's 7:30 on Sunday.\e"
-		// //Replace with what's appropriate.
-	// }
-	// //If you're not interested in these more specific checks, you can delete those last two elseifs and just leave the one for minute==0, or clear them all out as mentioned above, although leave in the HourCheck and mikireflag bits.
-	
-	// 
-	
+ 	 if minute == 0 //These ifs will check what time it is. Here, it's seeing if the minute equals zero...
+	 {
+ 		 if hour == 12 //And the hour equals 12, meaning it's noon. You can change this to some other hour if you want.
+		 {
+ 			 "\0\s[0]'It's noon.'\e"
+		 }
+ 		 elseif hour == 0 
+		 {
+ 			 "\0\s[0]\i[5]\s[1]'It's midnight.'\e"
+ 			 "\0\s[2]'I believe that it is 12 AM for you now.'\n\n'You should get some sleep at some point.'\e"
+		 }
+		 else
+		 {
+			 "\0\s[0]It's %(hour12) o'clock.\e"
+			 //%(hour12) stores the time. This is a general top of the hour notification. 
+		 }
+	 }
+	 //checking for a specific time
+	 elseif hour == 5 && minute == 55 //this checks to see if the hour is 23 and the minutes are at 55... essentially, 11:55 pm.
+	 {
+		 "\0\s[2]'It is 5 minutes to it being 5 in the morning.'\w8\w6\n\n[half]'Go get some sleep and get me back to my alter and cliff.'\e"
+	 }
+	 elseif hour == 7 && minute == 30 && weekday == 2 
+	 {			
+		 "\0\s[11]'It's 7:30 on Tuesday.'\e"
+	 }
+	 
 	
 	//Advanced users who want to enable the off-screen boundary check = Remember mikireflag up in OnAiTalk? This is the flag that checks for that. You'll want to uncomment this here so it can trigger the dialogue.
 	
 	//Don't touch this part.
-	// elseif mikireflag == 1
- 	// {
- 		// MikireTalk
-	// }
+	 elseif mikireflag == 1
+ 	 {
+ 		 MikireTalk
+	 }
  }
 
 //--OnSecondChange
@@ -460,33 +457,37 @@ OnSecondChange
 
 
 //**** OnSurfaceRestore *****************************************************************
-//OnSurfaceRestore is a handy function. What this does is that after a short period of time, the ghost will go back to its default pose, so you won't have a ghost stuck in one expression for too long. It's also helpful if you've made one of the characters disappear using \s[-1] in dialogue and didn't bring them back at the end of it. This will do that for you.
-//I'm going to comment out the if/else statements in this because the circumstances in which they'd come up seem pretty unlikely and unnecessary if you're just going to be making a simple ghost. You can just leave this function alone and move on if you want. However, if you do want to use them, just uncomment the lines by deleting the slashes and fill in the info as you need.
+//OnSurfaceRestore is a handy function. What this does is that after a short period of time, the ghost will go back to its default pose, so you won't have a ghost stuck in one expression for too long. 
+//It's also helpful if you've made one of the characters disappear using \s[-1] in dialogue and didn't bring them back at the end of it. This will do that for you.
+//I'm going to comment out the if/else statements in this because the circumstances in which they'd come up seem pretty unlikely and unnecessary 
 
 //*********************Advanced User Info*******************************
 //You can put if statements in OnSurfaceRestore to make exceptions for certain poses, or to make sure that once they're in a certain pose, they stay in that pose. For example, if you turn my Hunter and Smoker ghost into eggplants, there's a check for the their eggplant pose numbers to make sure they STAY eggplants when OnSurfaceRestore is called.
 //You can also use OnSurfaceRestore to clean up things that might be left on the screen, primarily from using p[number]\s[] to call up other objects or characters. Just make sure to add a p[number]\s[-1] to OnSurfaceRestore, and that should get rid of it each time the ghost cleans itself up.
 //***********************************************************************
 
-OnSurfaceRestore
+OnSurfaceRestore 
  {
- 	//if reference0 == 4 || reference0 == 6 //This is checking what poses they are in. This looks to see if Girl is in pose 4 or pose 6, since she is reference0.
- 	//{
- 	//"\1\s[10]You're in a sad pose.\w8\0\s[0]I'll go back to normal then.\e"
- 	//}
- 	//elseif reference1 == 14 || reference1 == 16 //This is doing the same but for Triangle, since he's reference1. It looks to see if he's in pose 14 or post 16.
- 	//{
- 	//"\0\s[0]You look sad.\w8\1\s[10]I'll go back to normal.\e"
- 	//}
- 	//else
- 	//{
+ 	if reference0 == 7 || reference0 == 8 || reference0 == 9
+	{
+ 	"\0* Obie breathes in...\s[7]\w8\w8\w8\w8\w8\w8\n\n[half]* And breathes out...\s[2]\s[0]\e"
+ 	}
+ 	elseif reference0 == 1
+ 	{
+ 	"\0\s[1]\i[15]\s[0]"
+ 	}
+ 	else
+ 	{
 	"\0\s[0]\1\s[10]\e"
-	//}
+	}
+	//LINE 478 - This is checking what poses they are in. This looks to see if obie is in pose 4 or pose 6, since she is reference0.
+	//LINE 482 - This is doing the same but for Triangle, since he's reference1. It looks to see if he's in pose 14 or post 16.
  }
 
  
  //--OnKeyPress
- //This defines the hotkeys your ghost will use. You can change these to whatever you want, but I don't really know why you would. I'd just leave this alone. Advanced Users can add new hotkeys attached to whatever function if you want.
+ //This defines the hotkeys your ghost will use. You can change these to whatever you want, but I don't really know why you would. 
+ //I'd just leave this alone. Advanced Users can add new hotkeys attached to whatever function if you want.
  
 OnKeyPress
 {

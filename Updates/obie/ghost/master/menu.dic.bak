@@ -1,10 +1,12 @@
 ﻿//---------------------------Menus--------------------------
 OpenSakuraMenu //menu open dialogue
 {
-		"\0\s[0]\b2'Yes %(username)?'"
+		"\0\s[0]\b2* Sighs\w8\w7\n'Yes %(username)?'"
 		"\0\s[2]\b2'.....?'"
 		"\0\s[2]\b2'Something you need me to aid you in %(username)?'"
-		"\0\s[1]\b2'Yes?'"
+		"\0\s[1]\b2'What?'"
+		"\0\s[1]\b2'What.'"
+		"\0\s[1]\b2'Hmm?'"
 		--
 		MenuRun
 }
@@ -15,9 +17,12 @@ MenuRun : all //menu functions
  	wd = GetWeekDay
  	ap = GetAP
 	--
-	"\_q\b2\n\n* You ask Obie to....*\n\n[half]" //The \n\n means two new lines as detailed in the walkthrough, and \_q means quick session, meaning all the text from this point on will display instantly instead of a few letters at a time like normal ghost dialogue. You can ignore it.
+	"\_q\b2\n\n* You ask Obie to....*\n\n[half]" 
+	//The \n\n means two new lines as detailed in the walkthrough, and \_q means quick session, meaning all the text from this point on will display instantly instead of a few letters at a time like normal ghost dialogue. You can ignore it.
 	--
-	if lastTalk != "" //What this does is check to see if the ghost has already said a random bit of dialogue on its own, essentially by seeing if the lastTalk thing is NOT empty (!= means "does not equal").
+	if lastTalk != "" 
+	//What this does is check to see if the ghost has already said a random bit of dialogue on its own, 
+	//essentially by seeing if the lastTalk thing is NOT empty (!= means "does not equal").
 	{
 	  "\![*]\q[..repeat itself?,OnLastTalk]\n"
 	}
@@ -36,7 +41,7 @@ MenuRun : all //menu functions
 	"\![*]\q[..change settings?,configmenu]\n"
 	"\![*]\q[..use functions?,dosomething]\n\n[half]"
 	
- 	"\n\![*]\q[Change your mind.,CANCEL]\n\n\n[half]%(wd) %(nowhour):%(nowmin) %(ap), %(month)/%(day)/%(year)\e"
+ 	"\n\![*]\q[Nevermind.,CANCEL]\n\n\n[half]%(wd) %(nowhour):%(nowmin) %(ap), %(month)/%(day)/%(year)\e"
 }
 	  //*********************Advanced User Info*******************************  
 	  //I briefly touched in bootend.dic about \q, but I'll again cover it here. Pay very close attention to how this bit of dialogue is formatted. 
@@ -115,7 +120,8 @@ Select.configmenu
 //***********************************************************************
 
 //--TalkConfig
-//This menu allows the user to change their name and other information, as well as put in their birthday and change how often the ghost speaks. You can restructure how this looks if you want, but it's perfectly functional as is. 
+//This menu allows the user to change their name and other information, as well as put in their birthday and change how often the ghost speaks. 
+//You can restructure how this looks if you want, but it's perfectly functional as is. 
 
 TalkConfig : all
 {
@@ -127,14 +133,9 @@ TalkConfig : all
 	
 	"f[bold,1]Your name:\f[bold,0] %(username) \f[sup,1](\q[Rename?,TEACHNAME])\f[sup,0]\n"
 	
-	
-	//If you want your user to set their pronouns, you can uncomment this menu option by removing the two slashes in front. Read more on the walkthrough about commenting.
 	"\f[bold,1]Your pronouns:\f[bold,0] %(heshe)/%(himher)/%(hisher) \f[sup,1](\q[Change?,TEACHPRONOUN])\f[sup,0]\n"
 	
-	
-	//If you want your user to be able to set their birthday, you can uncomment this menu option.
 	"\n\f[bold,1]Your birthday:\f[bold,0] %(birthdayprint) \f[sup,1](\q[Change?,TEACHBDAY])\f[sup,0]\n"
-	
 	
 	"\n\f[bold,1]Talking Rate:\f[bold,0] - every %(talktime) \f[sup,1](\q[Change?,talkinter])\f[sup,0]\n\n"
 	
@@ -363,6 +364,7 @@ Select.talkinter : all
 Select.TalksTill
 	{
 		"\0\s[2]'Okay, I'll keep you company like how I have been.'\e"
+		"\0\s[1]'Easy enough.'"
 	}
 
 //If the user chooses every 30 seconds.
@@ -371,7 +373,8 @@ Select.TALKMAX
  		talktime = "30 seconds" //this sets up the envelope properly
 		aitalkinterval = 30 //this changes the actual rate
 		
- 		"\0\s[2]'I will speak every 30 seconds.'\s[12]\n\n[half]*(Am I happy %(username) wants me to talk more?\w8 Or annoyed that I have to figure out what to say for every thirty seconds..)*\e"
+ 		"\0\s[2]'I will speak every 30 seconds.'"
+		"\0\s[12]'Okay.'\n\n*(Am I happy %(username) wants me to talk more?\w8 Or annoyed that I have to figure out what to say for every thirty seconds..?)*\e"
 	}
 
 //If the user chooses every minute.
@@ -381,6 +384,7 @@ Select.TALKHIGH
 		aitalkinterval = 60
 		
  		"\0\s[2]'I will speak every minute.'\e"
+		"\0\s[12]'Okay.'\n\n*(Am I happy %(username) wants me to talk more?\w8 Or annoyed that I have to figure out what to say for every minute..?)*\e"
 	}
 
 //If the user chooses every three minutes.
@@ -445,6 +449,8 @@ Select.CANCEL
 		"\0\s[2]'..Okay??'\e"
 		"\0\s[2]'Hmm\w2.\w2.\w2. Okay.'\s[0]\e"
 		"\0\s[2]'Mmm.'\e"
+		"\0\s[1]'Fine.'"
+		"\0\s[0]'Whatever.'"
  	}
 
 	
@@ -465,8 +471,7 @@ Select.CANCEL
 Select.dosomething : all
 {
  		FunctionMenuIntros	
-		"\n[half]\_q\b2\0\s[2]'What can I do for you?'\n\n[half]*You ask Obie to...?*\n\n"
-		//this line ^ calls one of the intros above. If you are using the extra intros, you can uncomment this line.
+		"\n[half]\_q\b2\0\s[2]'What do you want me to do for you this time?'\n\n[half]*You ask Obie to...?*\n\n"
 		//the -- splits the intros and the menu choices
 		--
  		"\![*]\q[Open Calendar,CALENDAR]\n"
@@ -478,7 +483,7 @@ Select.dosomething : all
 		"\![*]\q[Update,keroupdatecheck]\n"
 		"\![*]\q[System Info,ChoiceSystemInformation]\n\n"
 		
-		"\![*]\q[Test variable,testvariable]\n\n"
+//		"\![*]\q[Test variable,testvariable]\n\n"
 	//uncommment this ^^ When you are done with the test variable, 
 	//aka your ghost is finished or you just don't want it showing up when you publish your ghost beta or whatevs, 
 	//simply add two // slashes in front of "\![*]\q[Test variable,testvariable]\n\n" to comment the line out. 
@@ -515,6 +520,9 @@ Select.ChoiceGarbagecan
 	elseif _gomicheck >= 1 //If the recycle bin is full.
 	{
 		"\0\s[2]'Emptying the recycle bin.'\w8\0\s[1]'Be right back.'\w8\w8\s[-1]\w8\w8\w8\w8\w8\![raise,OnGarbagecanEmpty]\w9\w9\w9\0\s[2]\c'Done.'\e"
+		
+		"\0\s[2]'I am going to enjoy harvesting and eating your files now.'\w8\0\s[1]'Be right back.'\w8\w8\s[-1]\w8\w8\w8\w8\w8\![raise,OnGarbagecanEmpty]\w9\w9\w9\0\s[2]\c'That was delicious.'\e"
+
 		
 		"\0\s[2]'I'll be back in a second.'\w8\w8\s[-1]\w8\w8\w8\w8\w8\w8\w8\![raise,OnGarbagecanEmpty]\w9\w9\w9\0\s[5]\c'Finished.'\e"
 	}

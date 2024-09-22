@@ -6,7 +6,7 @@ charset,UTF-8
 type,shell
 name,Diamond Shell
 craftman,MysticRakkoon
-craftmanurl,https://x.com/MysticRakkoon
+craftmanurl,https://github.com/MysticRakkoon/ObieGhost.github.io
 
 sakura.balloon.offsetx,10
 sakura.balloon.offsety,10
@@ -45,8 +45,12 @@ menu.sidebar.bitmap.filename,menu_sidebar.png
 
 
 //--Dress-up Code
-//Clothing can be a little complicated, so I'd recommend reading the clothing page on the walkthrough before coming back here. I'll leave a bit of cindysuke's clothing code in here just as an example. If you're going to use these lines, make sure to uncomment them by removing the slashes.
-//As a brief overview, sakura (the main character), has a clothing item called "glasses" that's in a section called "face". The second character, kero, has two items, one called "glasses" in the "face" section and one called "hairpins" that's in the "hair" section. What you call these sections and items of clothing is up to you if you're actually doing this. Note the numbers after bindgroup though! We're going to be using them in just a second.
+//Clothing can be a little complicated, so I'd recommend reading the clothing page on the walkthrough before coming back here. 
+//I'll leave a bit of cindysuke's clothing code in here just as an example. If you're going to use these lines, make sure to uncomment them by removing the slashes.
+//As a brief overview, sakura (the main character), has a clothing item called "glasses" that's in a section called "face". 
+
+//The second character, kero, has two items, one called "glasses" in the "face" section and one called "hairpins" that's in the "hair" section. 
+//What you call these sections and items of clothing is up to you if you're actually doing this. Note the numbers after bindgroup though! We're going to be using them in just a second.
 
 //sakura.bindgroup51.name,face,glasses
 
