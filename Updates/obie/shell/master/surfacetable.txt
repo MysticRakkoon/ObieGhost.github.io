@@ -47,8 +47,6 @@ group,C
 }
 
 //First, we define a group. Then we give that group a name, in this case, G. You generally have VERY little space to read with the Surface Test, 
-//so you'll want these group names to be pretty short. But you can adjust and change it as you try this out.
-
 //Once we defined the group, we open up some brackets to put in our values. That first line defines whether the group applies to the main character of the ghost or the sidekick. 
 //It's not a super meaningful distinction, in my experience, but there's no harm in including it. 0 means the surfaces are associated with the main character, and 1 is associated with the side character, as usual.
 

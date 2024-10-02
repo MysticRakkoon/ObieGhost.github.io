@@ -18,18 +18,19 @@ OnDressupChanged
 */
 
 
-
-
 //*********************Advanced User Info*******************************
 //--A Note about Functions--
 //A function that begins with On, such as OnFirstBoot here, can be called from anywhere in any .dic file by using \![raise] or by just sticking OnFunction somewhere. 
-//A function that does NOT start with On, however, can be a bit finicky. You can create your own functions all over the place if you want, there's just a difference between OnDoodlebop and Doodlebop, if you get me. See the walkthrough page about coding for more about creating functions.
+//A function that does NOT start with On, however, can be a bit finicky. You can create your own functions all over the place if you want, there's just a difference between OnDoodlebop and Doodlebop, 
+//if you get me. See the walkthrough page about coding for more about creating functions.
 
 //If you're having trouble getting a function of yours to run, like Doodlebop, try changing it to OnDoodlebop and see if that fixes it.
 
-//Trying to run the entire function using \![raise,OnFirstBoot] will instead bring up your alternate dialogue, so sadly you can't check it that way. You CAN get it to run using \![raise,OnFirstBoot,0] though.
+//Trying to run the entire function using \![raise,OnFirstBoot] will instead bring up your alternate dialogue, so sadly you can't check it that way. 
+//You CAN get it to run using \![raise,OnFirstBoot,0] though.
 
-//If you're going to be adding new variables and values and such, make sure you define them all in OnFirstBoot! You can make any value you want, but it has to equal SOMEthing to exist at first. Then you can do whatever with it.
+//If you're going to be adding new variables and values and such, make sure you define them all in OnFirstBoot! You can make any value you want, but it has to equal SOMEthing to exist at first. 
+
 //***********************************************************************
 
 
@@ -39,31 +40,38 @@ OnFirstBoot : all
 	passhour = 0
 	passmin = 0 
 	passsec = 0 // These keep track of the time.
- 	username         = "USER" //This sets a temporary name for the user. It'll be replaced when they tell the ghost their name.
+ 	username         = "USER" //This sets a temporary name for the user
 	stroke           = 0	// Sets their being-pet state to zero.
- 	teachusername    = 0	// Related to them learning your name.
+ 	teachusername    = 0	
 	mikireflag       = 0	// Determines behavior at certain points.
  	aitalkinterval = 1800 //Their default talk rate.
  	birthdayprint = "????" //A temporary value for the user's birthday.
-	talktime = "5 minutes" //How the value aitalkinterval will display in the config menu.
-	deleteshitai = "OFF" //Sets whether or not the user can uninstall the ghost to "OFF". The user can change it later in the config menu (see menu.dic). 
+	talktime = "30 minutes" 
+	deleteshitai = "OFF" //Sets whether or not the user can uninstall the ghost to "OFF" 
 	nowshell = "master" //This is for a special if check in aitalk.dic to see what shell the ghost is using. You should use the name of your default shell folder here.
-	firstboot = 1 //This marks that this is the first time you've run the ghost. It's so it won't reroute to general name changing dialogue when the user inputs their name. Uncomment this if you're going to have your ghost ask the user directly when they're first booted for the user's name.
+	resetcount = 0
+	positiveact = 0
+	negativeact = 0
+	firstboot = 1	
 	
 	if reference0 == 0 //Don't touch this line.
  	{		
-		"\1\s[10]\0\s[2]'Hello.'\w8\w8\s[5]\w4\s[3]\w4\s[11]\w4\s[6]\w4\s[4]\w4\s[12]\n\n[half]'I seem to be in your computer screen...'\w8\s[1]\n'Strange...\w8\w4\w6\n\s[2] I normally can't speak the human tongue, please excuse if I say something strange.\w2\s[3]\n Well, type something wrong with how you're translating what I've been saying.'\w8\w8\s[0]\w8\n\[half]'You may refer to me as Obie.'\x\e"
-		"\1\s[10]\0\s[0]'Since I can talk to you only,\w2 best to get some formalities out of the way.'\x\w8\0\c\s[2]'How should I refer to you, human?'\n\n[half]"
+		"\1\s[10]\0\s[2]'Hello.'\w8\w8\s[5]\w4\s[3]\w4\s[11]\w4\s[6]\w4\s[4]\w4\s[12]\n\n[half]'I seem to be in your computer screen...'\w8\s[1]\n'Strange...\w8\w4\w6\n\n[half]\s[2] I normally can't speak the human tongue, please excuse if I say something strange.\w2\s[3]\n Well, type something wrong with how you're translating what I've been saying.'\w8\w8\s[0]\w8\n\n[half]'You may refer to me as Obie.'\x\e"
+		"\1\s[10]\0\s[0]'Since I can talk to you now,\w2 best to get some formalities out of the way.'\x\w8\0\c\n\n\s[2]'How should I refer to you, human?'\n\n[half]"
 		"\w5\_q\![*]\q[He/Him/His,choicefirsthehim]\n"
 		"\![*]\q[She/Her/Hers,choicefirstsheher]\n"
 		"\![*]\q[They/Them/Their,choicefirsttheythem]\e"
 		
-		//You can rename the choices at the bottom of that pronoun menu question anything you like. The basic structure of a choice goes like \q[Displayed Name,Linkedfunction]. So for example, \q[Do a Dance,danceitup] would display "Do a Dance" in the balloon and it would link to the function titled "danceitup".
-		//Note - Do not include quotation marks in the displayed name, or any other symbols like brackets or dialogue coding like \_a, since that'll break the option in the balloon. If you do this you'll notice pretty quickly. Also option names do not word wrap, so don't make them too long if your balloon is small.
+		//You can rename the choices at the bottom of that pronoun menu question anything you like. 
+		//The basic structure of a choice goes like \q[Displayed Name,Linkedfunction]. So for example, \q[Do a Dance,danceitup] would display "Do a Dance" in the balloon and it would link to the function titled "danceitup".
 		
-		//If you remember my note from above about the difference between On functions, this is one place it comes up. If your linked function in this menu doesn't start with On, like danceitup up there, you'll have to preface it in the following code with Select.danceitup. You can see this at work below here. However, if it does have On, such as OnDanceitup, then you can simply name the function in the code as OnDanceitup. Take a look whenever functions are defined and how they're called in the files,and it should come together for you.
+		//If you remember my note from above about the difference between On functions, this is one place it comes up. 
+		//If your linked function in this menu doesn't start with On, like danceitup up there, you'll have to preface it in the following code with Select.danceitup. 
+		//You can see this at work below here. However, if it does have On, such as OnDanceitup, then you can simply name the function in the code as OnDanceitup. 
+		//Take a look whenever functions are defined and how they're called in the files,and it should come together for you.
 		
-		//If you link to a function that doesn't exist, the ghost will do nothing. This can be handy for "Cancel" type functions, just point it at something that doesn't exist if you don't want to have a specific bit of cancel dialogue.
+		//If you link to a function that doesn't exist, the ghost will do nothing. 
+		//This can be handy for "Cancel" type functions, just point it at something that doesn't exist if you don't want to have a specific bit of cancel dialogue.
 		//***********************************************************************
  	}
 	else
@@ -89,8 +97,10 @@ OnFirstBoot : all
 //To define a value, you use a single = mark. If it's a word, you need to put it in quotation marks, but if it's a number, you do not. See the walkthrough page on coding for details.
 
 //Notice how each choice is formatted as Select.choice. This is what I was talking about above with the difference between OnFunction and Function. 
-//These choices do not start with On, so they must begin with Select. instead. If you're setting up some quick choices for a menu you're only going to do once, then don't be afraid to use select. instead of having everything start with On.
+//These choices do not start with On, so they must begin with Select. instead. If you're setting up some quick choices for a menu you're only going to do once, 
+//then don't be afraid to use select. instead of having everything start with On.
 //***********************************************************************
+
 
 Select.choicefirsthehim //donottouch
 {
@@ -129,7 +139,9 @@ Select.choicefirsttheythem //donottouch
 //NameInput is the next step in our introduction sequence. Now that the ghost has the pronouns set properly, they can ask the user for their name. It's done in this order so they'll know what prefixes will be appropriate for their name, like Mr. to he/him for example.
 
 //*********************Advanced User Info*******************************
-//Note this functions' name. This isn't a natural function included in the ghost, it's a piece of dialogue created by the original base coder to finish this sequence (cindysuke). I point this out to show you that you can do this too! You can create any number of functions just like this called whatever you want to do and say whatever you want! There are many things you can do with your Ghost if you're creative. Don't feel limited by what's in these files or the listed Shiori functions!
+//Note this functions' name. This isn't a natural function included in the ghost, it's a piece of dialogue created by the original base coder to finish this sequence (cindysuke).
+// I point this out to show you that you can do this too! You can create any number of functions just like this called whatever you want to do and say whatever you want! 
+//There are many things you can do with your Ghost if you're creative. Don't feel limited by what's in these files or the listed Shiori functions!
 //Just make sure you test them and they work, alright? I wrote more about coding and functions in the coding page for the walkthrough.
 //***********************************************************************
 
@@ -137,22 +149,15 @@ NameInput
 {
 	
 	"\1\s[10]\0\s[2]'Next,\w5 what is your name?'\![open,inputbox,OnNameTeach,-1]\e"
-	
-	//leads to the naming function defined in nameteach.dic, so don't touch it. Make sure it's there though! Otherwise your user won't have a way to put in their name. :o
-	
+		
 	//*********************Advanced User Info*******************************
-	//What this tag basically means is that you're calling a function at the end of the dialogue with the \! tag, you are telling it to open, you're telling it to open an inputbox, and you're telling that inputbox to link to a function called OnNameTeach, which is in the nameteach.dic file. Remember what I said about On functions? I talked a bit about this in the SakuraScripting walkthrough page and the coding page.
+	//What this tag basically means is that you're calling a function at the end of the dialogue with the \! tag, you are telling it to open, you're telling it to open an inputbox, 
+	//and you're telling that inputbox to link to a function called OnNameTeach, which is in the nameteach.dic file. 
+	//Remember what I said about On functions? I talked a bit about this in the SakuraScripting walkthrough page and the coding page.
+	
 	//The -1 at the end determines how long the box will be open until it times out. -1 means it shouldn't time out at all, I think.
 	//***********************************************************************
 }
-
-
-
-//&&&&&&&
-//*********************************
-//NAME/PRONOUNS END
-//*********************************
-//&&&&&&&
 
 
 
@@ -238,27 +243,27 @@ OnBoot //regular start up
 	
 	elseif dayslot == "12month 25day" 
 	{
-				"\0\s[2]I believe today is a day that you humans tend to celebrate?\w5\s[1]People used to leave gifts and food for me on a mountian cliff the designated for me.\w8\w4\n'It was quite thoughtful...'\w8\w6\s\[2]'Anyways, Merry Christmas.'\e"
+				"\0\s[2]'I believe today is a day that you humans tend to celebrate?'\n\w5\s[1]'People used to leave gifts and food for me on a mountian cliff the designated for me.'\w8\w4\n\n[half]'It was quite thoughtful...'\w8\w6\n\n\s[2]'Anyways, Merry Christmas.'\e"
 	}
 	elseif dayslot == "7month 4day"
 	{
-				"\0\s[2]'It's the fourth of July.\w4 Happy Independance Day.'\e"
+				"\0\s[5]'It's the fourth of July.\w4 Happy Independance Day.'\e"
 	}
 	elseif dayslot == "9month 14day"
 	{
-				"\0\s[1]'I think this is the day I came into your computer....'\w8\w5\n\n[half]\s[6]*..It seems to think for a moment..\w8\w8\w3\n\n[half]'This year has gone so quick,\s[12]\w3 and so much has changed.'\n\n[half]\w8\w4\s[2]'I am glad I could keep you company for so long.'\e"
+				"\0\s[1]'I think this is the day I came into your computer....'\w8\w5\n\n[half]\s[6]* It seems to think for a moment.\w8\w8\w3\n\n[half]'This year has gone so quick,\s[12]\w3 and so much has changed.'\n\n[half]\w8\w4\s[2]'I am glad I could keep you company for so long.'\e"
 	}
 	elseif dayslot == "7month 1day"
 	{
 				"\0\s[2]'Happy Canada Day to those who celebrate.'\e"
 	}
-	elseif dayslot == "2month 7day"
+	elseif dayslot == "6month 4day"
 	{
-				"\0\s[2]'This is the day you have both started dating offically.' \n\s[1]'Congrats.'\e"
+				"\0\s[2]'Happy Canada Day to those who celebrate.'\e"
 	}
 	elseif dayslot == "11month 7day"
 	{
-				"\0\s[2]'Happy Anniversary Rob and Isabel.'\w8\s[0]\n\n[half]'You both are the people who brought me here. \w4So it makes sense for me to wish you congratulations on your union.'\e"
+				"\0\s[2]'Happy Anniversary Rob and Isabel.'\e"
 	}
 	else
 	{
@@ -275,11 +280,11 @@ normalboottalk
 {
 	"\0\s[2]'Oh'\w8\w8\s[1]\w4\s[2]\w4\s[0]\w4\s[2]\n\n[half]'Looks like I am back here.'\e"
 	
-	"\1\s[10]\0\s[2]'Hello.'\n\n[half]\w8\w4'You should kiss you soon to be wife.'\e"
+	"\0\s[2]'Hello.'\n\n[half]\w8\w4'You should kiss you soon to be wife.'\e"
 	
-	"\1\s[10]\0\s[2]'Hello.'\e"
+	"\0\s[2]'Hello.'\e"
 	
-
+	"\0\s[5]'Did you really have to whisk me away back over here?'\e"
 	
 	
 //--special normal boot talk
@@ -329,7 +334,7 @@ normalboottalk
 		 elseif timeslot == "latenight"
 		 {
  		 "\0\s[2]'Hello.'\i[25]\w8\w8\w8\w8\w6\w6\n\n[half]'Going for a late night are you?'\w8\s[0]\e"
-		 
+		  
 		 "\0\s[1]'Hello. Make sure to not stay up too late.'\e"
 		 }
 		 else //the last timeslot we haven't done is midnight, which is what's under here.
@@ -358,7 +363,9 @@ OnClose
  
  
  //*********************Advanced User Info*******************************
-	//This works just like the one above for normalbootttalking! There are some different variables that can get checked of course, and make sure that it ends with \w8 and \-. The basic set-up of it here should take care of that for you, but it's always good to be cautious. Just uncomment and add the following into OnClose up there: 
+	//This works just like the one above for normalbootttalking! 
+	//There are some different variables that can get checked of course, and make sure that it ends with \w8 and \-. 
+	//The basic set-up of it here should take care of that for you, but it's always good to be cautious. Just uncomment and add the following into OnClose up there: 
 
  
 	// if passmin >= 5 || passhour > 0	//This checks to see if you've had them open for at least five minutes.

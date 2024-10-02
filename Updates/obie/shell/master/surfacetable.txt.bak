@@ -27,17 +27,17 @@ group,O
 	12,DownR
 }
 
-group,E
-{
-	scope,0
+//group,E
+//{
+//	scope,0
 	
-	13,Mid.Squint
-	14,Mid.HalfOpen
-	15,Mid.Open
-	16,R.Squint
-	17,R.HalfOpen
-	18,R.Open
-}
+//	13,Mid.Squint
+//	14,Mid.HalfOpen
+//	15,Mid.Open
+//	16,R.Squint
+//	17,R.HalfOpen
+//	18,R.Open
+//}
 
 group,C
 {

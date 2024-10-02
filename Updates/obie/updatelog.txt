@@ -1,4 +1,46 @@
+v1.0.0.8-alpha //pre-release
 
+	Updated Features:
+	
+		- Surface images updated
+			
+			- Eye is changed to match the style of Obie 
+			
+			-default image is saved as a base rather than overlay
+			
+			- changed images from base to overlay to see if overlapping images will be fixed
+			
+			- Added surface13 for the fire alter animation 
+			
+			-created turning animations for surfaces 0 and 1
+			
+			- Added intervals 30,31,40,41 with surfaces 3 and 4 to make moving side to side animations
+				- in aitalk.dic i am going to make those side to side animations move back and forth randomly
+					- right now they are built in peices so i have to stitch them together with the movements or else obie wont be face the direction it is supposed to be moving
+						-30 corrisponds with 40 and 31 corrisponds with 41
+			
+		- added all of these to bootend.dic - want to add a positive and negative acts for the user to use - but havent fully figured out how to patch that in 
+			- resetcount = 0
+			- positiveact = 0
+			- negativeact = 0
+				- this all is to set up the pos and neg interactions 
+		
+		-fixed some typos in bootend.dic
+
+		-word.dic changes:
+			-removed %(folderdialogue)
+				-it was causing problems with overlapping surfaces when being called. 
+*NOTE					//-I need to test later whether or not i can use surface changes in word.dic or not
+			-moved all green commentary to the bottom so i can refer to it later and so i can find all the different envolopes better
+		
+		-etc.dic
+			-the updates dialouge has been updated. I hope that this wont be annoying for the users updating the ghost with it talking everytime it needs to update something.
+			
+.
+
+	
+
+------
 
 v1.0.0.7-alpha //pre-release
 

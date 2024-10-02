@@ -1,5 +1,5 @@
-﻿charset,UTF-8
+﻿charset,UTF-8 //donttouchthiss
 type,ghost
 name,Obie
 directory,Obie
-balloon.directory,cosmic_pixel_4_cyan
+balloon.directory,cosmic_pixel_4_cyan //this is making the balloon install with the ghost

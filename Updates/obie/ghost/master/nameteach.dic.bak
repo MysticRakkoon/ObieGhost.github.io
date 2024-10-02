@@ -5,7 +5,7 @@ OnTeachName
 {
 	if reference0 == "TEACHNAME" //ignore this
 		{
-		"\0\s[2]'What should I call you by?'\![open,inputbox,OnNameTeach,-1]\e"
+		"\0\s[2]'Since I am stuck here with you I guess I should learn your name.'\w8\w8\n\n'What is your name?'\![open,inputbox,OnNameTeach,-1]\e"
 		}
 	else
 		{
@@ -38,6 +38,10 @@ OnNameTeach
 	elseif reference0 == "Cliff"
 	{
 		"\0\s[2]'....'\w8\w6\n'That cannot be your name... Humans use that name for a part of terrian, not for a human....'\w8\w8\n 'If your name is that, I pity you. Give yourself a nice nickname instead.'[open,inputbox,OnNameTeach,-1]"
+	}
+	elseif reference0 == "Rob"
+	{
+		"\0\s[12]'I have heard a lot about you %(username) from the person who brought me here.'\w8\w8\w4\n\n\s[1]'She seems to love you very much and talked about you to great lengths.'\n\n[half]\w7'I am glad I got to meet you, whether or not you're whisking me away to where-ever here is\w4.\w4.\w4.'\n\n'For my reference, please choose a different name that I can call you by.\e"
 	}
 	elseif reference0 == ""
 	{
@@ -72,12 +76,18 @@ OnNameTeach
 		// "\![*]\q[Ms.,titlems]\n/
 		// \![*]\q[Lady,titlelady]\n"
 		// }
-		// -- //the titles after this are gender neutral and will appear for all users. If you want to remove the masculine and feminine titles entirely, just delete from the curly bracket one line up to the double dashes above "if presuffix == "masculine". That should leave only the neutral titles. Make sure to leave a set of double dashes above the neutral titles though. You can also just put the feminine and masculine titles in here too if you want all titles to be available to all users at all times.
+		// -- //the titles after this are gender neutral and will appear for all users. If you want to remove the masculine and feminine titles entirely, 
+		//just delete from the curly bracket one line up to the double dashes above "if presuffix == "masculine". That should leave only the neutral titles. 
+		//Make sure to leave a set of double dashes above the neutral titles though. 
+		//You can also just put the feminine and masculine titles in here too if you want all titles to be available to all users at all times.
 		// "\![*]\q[-ssi,titlessi]\n/
 		// \![*]\q[-san,titlesan]\e"
 		// //Note that the final line here ends with \e instead of \n/, since it is the final option. Make sure your final option (and ONLY your final option) always ends with \e. More on that in the box below.
 	// }
-	//Adding new titles for your users to use is simply a matter of copy and pasting creatively. You can see how the ghost puts together the title and your name in the Select. sections below. Above, you simply need to add a new option and link it to a new Select. For example, you could add "\![*]\q[Mistress,titlemistress]\n/" between Ms. and Lady up there, then write up a Select.titlemistress below that fits the pattern of the others.
+	//Adding new titles for your users to use is simply a matter of copy and pasting creatively. 
+	//You can see how the ghost puts together the title and your name in the Select. sections below. 
+	//Above, you simply need to add a new option and link it to a new Select. 
+	//For example, you could add "\![*]\q[Mistress,titlemistress]\n/" between Ms. and Lady up there, then write up a Select.titlemistress below that fits the pattern of the others.
 	//***********************************************************************
 	
 	//The following Select.title[word] functions add the title to the user's name, then go to the final step, NameDone. You don't have to touch any of these. Advanced users, notice how these match the linked functions in the choices above.

@@ -1,10 +1,4 @@
-﻿//---------------------------AI Talk--------------------------
-//Alright, this is it! The bread and butter of your ghost. This is where all their random conversations are stored. Of all the .dic files, this is the one you will probably be adding stuff to and updating the most as new dialogue comes to your mind. It is relatively simple in that there aren't many functions or real coding involved with this file, but there are a few cool tricks you can do within randomtalk that can make dialogue with interesting effects, so I'll point them out as we go along.
-
-//I'm going to leave a lot of examples of different types of dialogue in here that you can study if the possibilities they present intrigue you. Study them carefully!
-
-//If you see a big block of commented text you want to uncomment, highlight the text and then hit ctrl-shift-k in Notepad++ and that should uncomment it. Mostly this is intended for advanced users.
-
+﻿
 /*
 This file has...
 
@@ -113,8 +107,6 @@ RandomTalk : nonoverlap_pool
 {	
 	"\0\s[1]'This seems like an interesting place.'\e"
 	"\0\s[2]'There are a lot of places I used to frequent besides here.\w2 I have been %(obielocations).'\e"
-	"%(folderdialogue)\e"
-	"%(folderdialogue)\e"
 	"\0\s[11]'You're kind to spirit me away for a little break, human.'\w5\n\n[half]'We all can use a break sometimes.'\e"
 	"\0\s[2]\s[12]* It's humming a tune.'\e"
 	"\0\s[0]* (Is it watching you...?) \n\w5* (It's hard to tell...)\w8\i[2]\w8\n\n[half]* (Oop yes it was!)\e"
@@ -124,9 +116,14 @@ RandomTalk : nonoverlap_pool
 	"\0\s[5]'I wonder if %(offeringitems) is still at my cliff.'\e"
 	"\0\s[5]'I have been here for %(passmin) minutes.'\e"
 	"\0\s[2]\i[22]\w8\w8\w8\w8\w8* (Is it trying to watch and learn from you?)"
+	"\0\s[5]* It looks like it is looking through something...\w8\w8\s[2]\i[22]\w8\n\n[half]'So many interesting folders you have there.'"
+	"\0\s[2]\w8\w8\w8\w6\s[1]\i[12]\w8\w8'I can see your folders....'\n\n[half]\w8\w8\w8\w8\w6'I wonder what's in there....'\s[2]\w8\w8\w6\n\n[half]'...Anything in there for me maybe?'"
+	"\0\s[2]'Your folders look tasty...\w4\w2 Can I eat one?"
+	"\0\s[2]\s[6]'The %(usersfolder) looks especially tasty\w6.\w6.\w6.\w6.'\n\n[half]'May I?'"
+	"\0\s[2]'I have been here for %(passmin) minutes.'"
+//	"\0\s[0]\i[5]\s[1]\s[4]\i[41]\s[3]\1[31]* (It seems to be exploring your monitor...?)" -trying to get it to move randomly - need to see if there is a better way to get this to work.
+		//this is turning to \s[1] and then moving to the right, turning and then moving to the left back to default position.
 	
-	//"\1\s[10]Here we'll use the envelope 'internalenvelope' to show an envelop containing another envelope.\w8\0\s[0]%(internalenvelope).\e"
-	//Here's an example using the internal envelope I mentioned in word.dic. Basically, a function within a function. More on that kind of thing on the coding page of the walkthrough.
 	
 	//"\1\s[10]Here is dialogue referring to Anchor 1.\w8\0\s[0]Here is dialogue referring to Anchor 2 and Anchor 3.\e"
 	//Anchor words are defined more in anchor.dic. Note here when you see this dialogue that Anchor 1, 2, and 3 become links when spoken, even if they weren't written as links in the dialogue in this file. This is why anchor words are convenient, you don't have to set up link code every time they say a certain word. Try clicking the links when they appear to see what they lead to. It'll give you an idea of exactly how anchors work.

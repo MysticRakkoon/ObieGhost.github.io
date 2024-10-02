@@ -57,23 +57,6 @@ OnShellScaling
 OnFileDrop2
 */
 
-//You can guess at what each function does by its name for the most part. 
-//You can go through and find the functions that seem the most interesting, or the most likely, to appear and then just fill those out if you don't want to do all of them. 
-//Or, if you want to go full nuclear, you can just wipe this whole file and let SSP's default dialogue handle whenever these scenarios come up. 
-//It depends on what you have the energy for and how thorough you want to be.
-
-//This file IS long, but you'll only have to do it once! 
-//Probably. And again, you don't have to do all of it, or even most of it if you don't want to. 
-//Don't let this be a roadblock for you! It's basically bonus material! What matters is your aitalk file more than anything. 
-//You can always come back to this and fill it out over time once your ghost is already published. 
-//Don't get stuck here! I know it's easy to do so but don't let it happen to you! If you're getting stuck here just walk out, you can leave! lol. 
-//There's always aitalk, bootend, and menu to have more fun with, and that's the dialogue your user is going to see the most often.
-
-
-//If you see a big block of commented text you want to uncomment, highlight the text and then hit ctrl-shift-k in Notepad++ and that should uncomment it. Mostly this is intended for advanced users.
-
-
-
  //---- OnInstallBegin -------------------------------------------------------
  //OnInstallBegin is called when a file with an included install.txt is dropped on your ghost. 
  //This primarily means things like .nar files for other ghosts or .zip files containing balloons or shells for your ghosts. Primarily ghost-related things. Replace as you want.
@@ -239,7 +222,7 @@ OnVanished
  
 OnBIFFBegin
  {
-	"\0\s[0]'I will check.'\e"
+	"\0\s[1]'Fine, I will check.'\e"
  }
 
  
@@ -300,11 +283,6 @@ OnBIFFFailure
 
 
  //**** Network Update *****************************************************************
- //The following functions are for the Network Update of your ghost, where it will connect to your website, check for new files, and update itself. 
- //This is a handy feature, but tricky to set up. If you have no intention of using Network Update, you can disregard these, 
- //but it won't hurt to fill them out anyway just in case...More details about how to set up Network Update are in the walkthrough (http://www.ashido.com/ukagaka/).
- 
- //Replace the dialogue in the next set of functions as appropriate. You can easily test these messages using the Developer panel. 
  //Go to Open at the bottom of it and choose one of the four Update Event options to simulate a Ghost's update process. 
  //I highly recommend doing this at LEAST once if you're going to use this feature to make sure it flows well.
 
@@ -375,23 +353,15 @@ OnUpdateFailure
 
 
  //---- OnUpdate.OnDownloadBegin ------------------------------------------------
- //This dialogue plays when they begin downloading a new file. WARNING: if you have big plans for your ghost and are going to make a lot of new image files for it 
- //(like... i do, cough) at some point, you're going to want to make these messages very brief, if you even have them at all. 
- //The reason is because the user will see these messages for EVERY individual file that they have to download, and if you have, say, 50 pna files in the queue, 
- //they will see this dialogue 50 times. Not only that, but displaying the dialogue takes some time, so it also extends the download process.
- //If you aren't planning on adding a ton of files at any point, or are only intending to update the .dic files which will be at most a handful of files, 
- //then you can go ahead and put a short message in here. But if your ghost is going to grow in leaps and bounds as you work on it, 
- //try and keep these messages as brief as possible (or again, just make it "" to have there be no message at all) to make the process that much faster for your user.
+ //This dialogue plays when they begin downloading a new file. 
+ //keep it brief this will show EVERYTIME you try and update the ghost
  
 OnUpdate.OnDownloadBegin
  {
  	if "aitalk" _in_ reference0 
 	//this is checking to see what kind of files are being downloaded. In this case, it's looking for files called aitalk in the download queue. 
-	//If you want to have a specialized bit of dialogue for each type of file, you can expand this with elseifs and by replacing aitalk with whatever file you have in mind. 
-	//Keep in mind my warning above though.
- 	{
-		"\0\s[2]* (Downloading more dialogue)\e"
- 		//"\0\s[0]'I am going to download more dialogue.\w8\1\s[10]It's in the aitalk file.\e"
+	{
+		"\0\s[2]'Downloading more of my personality'\w8\w8\w5\n\n\s[1]* (...what???? How is that even possible??)\e"
  	}
  	else //for files not specified above
  	{
@@ -406,7 +376,7 @@ OnUpdate.OnDownloadBegin
  
 OnUpdate.OnMD5CompareBegin
  {
-	"\0\s[2]'Ugh,\w2 chekcing the MD5'\n\n[half]* (What ever that is?\w3 I guess I am checking it...)\e"
+	""
  }
 
  //---- OnUpdate.OnMD5CompareComplete --------------------------------------------------
@@ -414,7 +384,7 @@ OnUpdate.OnMD5CompareBegin
  
 OnUpdate.OnMD5CompareComplete
  {
-	"\0\s[1]'MD5 checks went well.'\e"
+	""
 }
 
  //---- OnUpdate.OnMD5CompareFailure ---------------------------------------------------
@@ -422,7 +392,7 @@ OnUpdate.OnMD5CompareComplete
  
 OnUpdate.OnMD5CompareFailure
  {
-	"\0\s[2]'The MD5 values don't match.'\n\n[half] 'Make sure the file is not missing or damaged or incomplete.'\w8\e"
+	"\0\s[2]* The MD5 values don't match.\n\n[half]* Make sure the file is not missing or damaged or incomplete.\w8\e"
  }
 
  
@@ -782,7 +752,7 @@ OnFileDrop2
 		}
 		others //Any other file format. As a note here, if you drop something ghost-related on them that does not have an install.txt, then they won't install it and will just say this response. If you are testing your balloon or nar files and you get this response instead of a proper installation, you should check and make sure you have an install.txt in the file!
 		{
-			"\0\s[5]This is %(_filename)%(_fileext).\e"
+			"\0\s[5]'This is %(_filename)%(_fileext).'\e"
 		}
 	}
 }
@@ -791,7 +761,7 @@ OnFileDrop2
 
 Select.SetWallpaper_0
 {
-	"\![set,wallpaper,%(Wallpaperfile),center]\0\s[0]The image is centered.\e"
+	"\![set,wallpaper,%(Wallpaperfile),center]\0\s[0]'The image is centered.'\e"
 }
 Select.SetWallpaper_1
 {

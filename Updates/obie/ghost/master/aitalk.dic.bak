@@ -1,10 +1,4 @@
-﻿//---------------------------AI Talk--------------------------
-//Alright, this is it! The bread and butter of your ghost. This is where all their random conversations are stored. Of all the .dic files, this is the one you will probably be adding stuff to and updating the most as new dialogue comes to your mind. It is relatively simple in that there aren't many functions or real coding involved with this file, but there are a few cool tricks you can do within randomtalk that can make dialogue with interesting effects, so I'll point them out as we go along.
-
-//I'm going to leave a lot of examples of different types of dialogue in here that you can study if the possibilities they present intrigue you. Study them carefully!
-
-//If you see a big block of commented text you want to uncomment, highlight the text and then hit ctrl-shift-k in Notepad++ and that should uncomment it. Mostly this is intended for advanced users.
-
+﻿
 /*
 This file has...
 
@@ -113,8 +107,6 @@ RandomTalk : nonoverlap_pool
 {	
 	"\0\s[1]'This seems like an interesting place.'\e"
 	"\0\s[2]'There are a lot of places I used to frequent besides here.\w2 I have been %(obielocations).'\e"
-	"%(folderdialogue)\e"
-	"%(folderdialogue)\e"
 	"\0\s[11]'You're kind to spirit me away for a little break, human.'\w5\n\n[half]'We all can use a break sometimes.'\e"
 	"\0\s[2]\s[12]* It's humming a tune.'\e"
 	"\0\s[0]* (Is it watching you...?) \n\w5* (It's hard to tell...)\w8\i[2]\w8\n\n[half]* (Oop yes it was!)\e"
@@ -124,9 +116,13 @@ RandomTalk : nonoverlap_pool
 	"\0\s[5]'I wonder if %(offeringitems) is still at my cliff.'\e"
 	"\0\s[5]'I have been here for %(passmin) minutes.'\e"
 	"\0\s[2]\i[22]\w8\w8\w8\w8\w8* (Is it trying to watch and learn from you?)"
+	"\0\s[5]* It looks like it is looking through something...\w8\w8\s[2]\i[22]\w8\n\n[half]'So many interesting folders you have there.'"
+	"\0\s[2]\w8\w8\w8\w6\s[1]\i[12]\w8\w8'I can see your folders....'\n\n[half]\w8\w8\w8\w8\w6'I wonder what's in there....'\s[2]\w8\w8\w6\n\n[half]'...Anything in there for me maybe?'"
+	"\0\s[2]'Your folders look tasty...\w4\w2 Can I eat one?"
+	"\0\s[2]\s[6]'The %(usersfolder) looks especially tasty\w6.\w6.\w6.\w6.'\n\n[half]'May I?'"
+	"\0\s[2]'I have been here for %(passmin) minutes.'"
+	"\0\s[0]\i[5]\s[1]\s[4]\i[41]\s[3]\1[31]* (It seems to be exploring your monitor...?)"
 	
-	//"\1\s[10]Here we'll use the envelope 'internalenvelope' to show an envelop containing another envelope.\w8\0\s[0]%(internalenvelope).\e"
-	//Here's an example using the internal envelope I mentioned in word.dic. Basically, a function within a function. More on that kind of thing on the coding page of the walkthrough.
 	
 	//"\1\s[10]Here is dialogue referring to Anchor 1.\w8\0\s[0]Here is dialogue referring to Anchor 2 and Anchor 3.\e"
 	//Anchor words are defined more in anchor.dic. Note here when you see this dialogue that Anchor 1, 2, and 3 become links when spoken, even if they weren't written as links in the dialogue in this file. This is why anchor words are convenient, you don't have to set up link code every time they say a certain word. Try clicking the links when they appear to see what they lead to. It'll give you an idea of exactly how anchors work.
@@ -360,37 +356,29 @@ OnMinuteChange //This is what will trigger time-based dialogue for your Ghost.
 	 {
  		 if hour == 12 //And the hour equals 12, meaning it's noon. You can change this to some other hour if you want.
 		 {
- 			 "\0\s[0]It's noon.\w8\1\s[15]Let's have a showdown!\w8\0\n\n[half]\s[9]There are no corrals here, dude.\e"
-			 //Replace with appropriate dialogue as you want.
+ 			 "\0\s[0]'It's noon.'\e"
 		 }
- 		 elseif hour == 0 //If the hour is zero, aka midnight. Again, you can change this to whatever hour you want to check for. This section is flexible! You can also add more elseifs if you want to check for other hours.
+ 		 elseif hour == 0 
 		 {
- 			 "\0\s[0]It's midnight!\e"
- 			 "\0\s[0]This is another bit of dialogue for midnight.\w8\1\s[10]BooooOoooOOOooOOOOo.\e"
- 			 "\0\s[0]This is the third bit of dialogue for midnight.\e"
-			 //Then replace the dialogue with what's appropriate.
+ 			 "\0\s[0]\i[5]\s[1]'It's midnight.'\e"
+ 			 "\0\s[2]'I believe that it is 12 AM for you now.'\n\n'You should get some sleep at some point.'\e"
 		 }
 		 else
 		 {
-			 "\0\s[0]It's %(hour12)'o clock.\e"
-			 //%(hour12) stores the time. This is a general top of the hour notification. I personally like this because it helps me keep track of time when I've been working on something, so when a ghost is all "Hey it's 3 o clock" I can be like woah really when did that happen. If you think this is annoying though, you can just delete this bit of dialogue to leave this else statement blank, or leave "" in here instead.
+			 "\0\s[0]It's %(hour12) o'clock.\e"
+			 //%(hour12) stores the time. This is a general top of the hour notification. 
 		 }
 	 }
-	 //You can also check for more specific times! For example...
-	 elseif hour == 23 && minute == 55 //this checks to see if the hour is 23 and the minutes are at 55... essentially, 11:55 pm.
+	 //checking for a specific time
+	 elseif hour == 5 && minute == 55 //this checks to see if the hour is 23 and the minutes are at 55... essentially, 11:55 pm.
 	 {
-		 "\0\s[0]5 minutes to midnight.\e"
-		 //Replace with what you like!
+		 "\0\s[2]'It is 5 minutes to it being 5 in the morning.'\w8\w6\n\n[half]'Go get some sleep and get me back to my alter and cliff.'\e"
 	 }
-	 elseif hour == 7 && minute == 30 && weekday == 0 //Here, it's checking for a specific time on a specific day. You can add things to your time checks just like this by using the AND operator, && (more about operators at the walkthrough page). This adds up to 7:30 am, Sunday. If you have a favorite TV program on at some time, you could have your ghost comment on when it comes on like this.
+	 elseif hour == 7 && minute == 30 && weekday == 2 
 	 {			
-		 "\0\s[0]It's 7:30 on Sunday.\e"
-		 //Replace with what's appropriate.
+		 "\0\s[11]'It's 7:30 on Tuesday.'\e"
 	 }
-	 //If you're not interested in these more specific checks, you can delete those last two elseifs and just leave the one for minute==0, or clear them all out as mentioned above, although leave in the HourCheck and mikireflag bits.
-	
 	 
-	
 	
 	//Advanced users who want to enable the off-screen boundary check = Remember mikireflag up in OnAiTalk? This is the flag that checks for that. You'll want to uncomment this here so it can trigger the dialogue.
 	

@@ -25,14 +25,6 @@ openforhowlong
 	"\0\s[2]'Give me a second to figure that out.'\w8\w8\w8\w8\w8\w8\s[1]\n\n[half]'Looks like I have been gracing you with my presence for %(passmin) minutes.'"
 }
 
-folderdialogue
-{
-	"\0\s[5]* It looks like it is looking through something...\w8\w8\s[2]\i[22]\w8\n\n[half]'So many interesting folders you have there.'"
-	"\0\s[2]\w8\w8\w8\w6\s[1]\i[12]\w8\w8'I can see your folders....'\n\n[half]\w8\w8\w8\w8\w6'I wonder what's in there....'\s[2]\w8\w8\w6\n\n[half]'...Anything in there for me maybe?'"
-	"\0\s[2]'Your folders look tasty...\w4\w2 Can I eat one?"
-	"\0\s[2]\s[6]'The %(usersfolder) looks especially tasty\w6.\w6.\w6.\w6.'\n\n[half]'May I?'"
-}
-
 tricks
 {
 	"\s[0]'I can float.'\i[4]"
@@ -47,6 +39,178 @@ obielocations
 	"in the ocean, in the deepest part of a forest\s[5]\n\n[half]\w1-well not deep enough as a village started to by built around me"
 	"in one of the deepest forests"
 }
+
+angrypose
+{
+	"\0\s[7]"
+	"\0\s[8]"
+	"\0\s[9]"
+}
+	
+weirdofferingitem
+{
+	"Pineapples at the cliff one time.'\w8\w2\n\n[half]'MULTIPLE Pineapples.\w7.\w7.'\w7\w6'Yeah I don't know why either.'"
+	"a stuffed teddy bear once.'\w8\s[1]\n\n[half]'...It's still there, frozen in ice...'"
+	"a cup of juice.'\n\n[half]'The entire cup was tasty.'"
+	"flowers.'\w8\w8\w8'Not sure how they even were brought up there in good condition with the fridged temperatures'"
+	"\s[7]a goat.'\w8\w8\w8\w7\w7\w8\n\n[half]\s[8]\i[80]'The DAMNED THING is still alive and thriving on eating MY offerings.'"
+}
+
+offeringitems
+{
+	"that teddy bear"
+	"\s[7]\i[70]THAT GOAT"
+	"that cat"
+	"the sented incense"
+	"those gloves"
+	"the gold"
+	"the cup of milk"
+}
+
+usersfolder
+{
+	"Recycle Bin"
+	"Document folder"
+	"Programs folder"
+	"Pictures folder"
+}
+
+colorlist
+{
+	"red"
+	"blue"
+	"yellow"
+	"green"
+	"orange"
+	"purple"
+	"black"
+	"white"
+	"indigo"
+	"blueyellow"
+	"yellowpurple"
+	"orangeblue"
+	"purpleblue"
+	"golden"
+	"flame"
+	"skycolored"
+	"raincolored"
+}
+
+color //changes the color of the colours listed in %(colourlist) i think?? no idea though??
+{
+	case colorlist 
+	{
+		when "red"
+		{
+		redgot = 1
+		"red"
+		}
+		when "blue"
+		{
+		bluegot = 1
+		"blue"
+		}
+		when "yellow"
+		{
+		yellowgot = 1
+		"yellow"
+		}
+		when "green"
+		{
+		greengot = 1
+		"green"
+		}
+		when "orange"
+		{
+		orangegot = 1
+		"bright orange"
+		}
+		when "purple"
+		{
+		purplegot = 1
+		"purple"
+		}
+		when "black"
+		{
+		blackgot = 1
+		"black"
+		}
+		when "white"
+		{
+		whitegot = 1
+		"white"
+		}
+		when "indigo"
+		{
+		indigogot = 1
+		"deep indigo"
+		}
+		when "blueyellow"
+		{
+		blueyellowgot = 1
+		"blue and yellow"
+		}
+		when "yellowpurple"
+		{
+		yellowpurplegot = 1
+		"yellow and purple"
+		}
+		when "orangeblue"
+		{
+		orangebluegot = 1
+		"red-orange and blue"
+		}
+		when "purpleblue"
+		{
+		purplebluegot = 1
+		"purple and blue"
+		}
+		when "golden"
+		{
+		goldengot = 1
+		"golden"
+		}
+		when "flame"
+		{
+		flamegot = 1
+		"flame-colored"
+		}
+		when "skycolored"
+		{
+		skygot = 1
+		"sky-colored"
+		}
+		when "raincolored"
+		{
+		raingot = 1
+		"rain-colored"
+		}
+	}
+}
+
+//Now, this next envelope is unique. I've called it a double envelope at times, but this is actually technically an array. Note that it has a word, a comma, then another word. 
+//This is essentially a list being stored in this envelope. You can call one of the values by using brackets around the number of the list entry. 
+//So, the first value (the Korean word) would be %(lessonkor[0]) since all arrays start at 0. The second value (the definition) would be %(lessonkor[1]). 
+//If you have a longer array, like "word,word,word,word,word", you can keep calling values by changing the numbers, like %(lessonkor[5]) or %(lessonkor[10]). 
+//Arrays can be very powerful and useful for storing a lot of information in a condensed space, but I must level with you, I'm not very good at arrays or figuring out how to use them. 
+//:B They can be VERY useful though, if you can wrap your head around how they work. An example of pulling information from this array can be seen in aitalk.dic.
+
+//lessonkor
+//{
+	//"사과(sa-gua),apple"
+	//"노동(no-dong),labor"
+	//"손가락(son-ga-rak),finger"
+	//"마르크스(ma-r-k-s),Marx"
+	//"자본주의(ja-bon-ju-yi),capitalism"
+//}
+
+//You can also format your envelopes like this as one line separated by semicolons, but personally I think the spaced lists above look nicer. It's up to you however you want to set them up.
+
+//blanklistparagraph
+//{
+	//"List paragraph 1"; "List paragraph 2"; "List paragraph 3"; "List paragraph 4"; "List paragraph 5";
+//}
+
 
 //Not only that, but you can put an envelope IN an envelope. Here's another example.
 
@@ -103,64 +267,8 @@ obielocations
 		
 	  //***********************************************************************
 
-angrypose
-{
-	"\0\s[7]"
-	"\0\s[8]"
-	"\0\s[9]"
-}
-	
-weirdofferingitem
-{
-	"Pineapples at the cliff one time.'\w8\w2\n\n[half]'MULTIPLE Pineapples.\w7.\w7.'\w7\w6'Yeah I don't know why either.'"
-	"a stuffed teddy bear once.'\w8\s[1]\n\n[half]'...It's still there, frozen in ice...'"
-	"a cup of juice.'\n\n[half]'The entire cup was tasty.'"
-	"flowers.'\w8\w8\w8'Not sure how they even were brought up there in good condition with the fridged temperatures'"
-	"\s[7]a goat.'\w8\w8\w8\w7\w7\w8\n\n[half]\s[8]\i[80]'The DAMNED THING is still alive and thriving on eating MY offerings.'"
-}
-
-offeringitems
-{
-	"that teddy bear"
-	"\s[7]\i[70]THAT GOAT"
-	"that cat"
-	"the sented incense"
-	"those gloves"
-	"the gold"
-	"the cup of milk"
-}
-
-usersfolder
-{
-	"Recycle Bin"
-	"Document folder"
-	"Programs folder"
-	"Pictures folder"
-}
 
 
-//Now, this next envelope is unique. I've called it a double envelope at times, but this is actually technically an array. Note that it has a word, a comma, then another word. 
-//This is essentially a list being stored in this envelope. You can call one of the values by using brackets around the number of the list entry. 
-//So, the first value (the Korean word) would be %(lessonkor[0]) since all arrays start at 0. The second value (the definition) would be %(lessonkor[1]). 
-//If you have a longer array, like "word,word,word,word,word", you can keep calling values by changing the numbers, like %(lessonkor[5]) or %(lessonkor[10]). 
-//Arrays can be very powerful and useful for storing a lot of information in a condensed space, but I must level with you, I'm not very good at arrays or figuring out how to use them. 
-//:B They can be VERY useful though, if you can wrap your head around how they work. An example of pulling information from this array can be seen in aitalk.dic.
-
-//lessonkor
-//{
-	//"사과(sa-gua),apple"
-	//"노동(no-dong),labor"
-	//"손가락(son-ga-rak),finger"
-	//"마르크스(ma-r-k-s),Marx"
-	//"자본주의(ja-bon-ju-yi),capitalism"
-//}
-
-//You can also format your envelopes like this as one line separated by semicolons, but personally I think the spaced lists above look nicer. It's up to you however you want to set them up.
-
-//blanklistparagraph
-//{
-	//"List paragraph 1"; "List paragraph 2"; "List paragraph 3"; "List paragraph 4"; "List paragraph 5";
-//}
 
 
  //**** Don't touch this ***************************************************************

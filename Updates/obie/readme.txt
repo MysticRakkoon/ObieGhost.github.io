@@ -1,14 +1,13 @@
 --Readme--
 HI!!
-I am mainly making this for us to keep track of things as we delve into our own personal projects and etc. Please let me know any suggestions you have! 
+I am mainly making this to keep track of things as we delve into our own personal projects and etc. 
+Please let me know any suggestions you have! 
 
 Features: 
 -Can recycle your recycle bin!
 -Tell you weird facts
 -Remind you to drink water, eat a snack, etc (hopefully you will be able to set the intervals for that in a later update)
 -Be trapped inside your computer screen 
-
-Sooner or later I will get the automatic updates figured out as well for this so you can update it and see all the changes and etc that I've added. 
 
 
 You must download the program SSP to run this. 

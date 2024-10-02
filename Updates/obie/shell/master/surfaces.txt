@@ -24,7 +24,7 @@ surface0
 		2pattern5,0,3,overlay,0,0
 
 //--Obie bobbing up ------------------------------
-	3interval,random,120
+	3interval,random,60
 		3pattern0,0,20,move,0,-1
 		3pattern1,0,21,move,0,-2
 		3pattern2,0,22,move,0,-3
@@ -102,7 +102,7 @@ surface0
 //Main Character Flipped base pose
 surface1
 {
-	element1,base,surface1509.png,0,0
+	element0,overlay,surface1509.png,0,0
 	
 //--Obie Random Blink----------------------------
 	11interval,random,250
@@ -220,7 +220,7 @@ surface1
 //Main Character frontal Pose
 surface2
 {
-	element1,base,surface1508.png,0,0
+	element0,overlay,surface1508.png,0,0
 
 //--Obie Random Blink----------------------------
 	21interval,random,250
@@ -241,7 +241,7 @@ surface2
 		22pattern5,0,3,overlay,0,0
 	
 //--Obie bobbing up ------------------------------
-	23interval,random,120
+	23interval,random,100
 		23pattern0,0,20,move,0,-1
 		23pattern1,0,21,move,0,-2
 		23pattern2,0,22,move,0,-3
@@ -342,9 +342,9 @@ surface2
 //Main Character Moving towards the left
 surface3
 {
-	element0,base,surface1501.png,0,0
+	element0,overlay,surface1501.png,0,0
 	
-//moving left
+//start 0 then moving left
 	30interval,never
 		30pattern0,0,2,move,0,0
 		30pattern1,0,2,move,-3,0
@@ -353,46 +353,76 @@ surface3
 		30pattern4,0,2,move,-25,0
 		30pattern5,0,2,move,-30,0
 		30pattern6,0,2,move,-37,0
-		30pattern7,0,2,move,-38,0
-		30pattern8,0,2,move,-40,0
+		30pattern7,0,2,move,-46,0
+		30pattern8,0,2,move,-56,0
+		30pattern9,0,2,move,-59,0
+		30pattern10,0,2,move,-60,0
 
+//start right then moving back to 0 (40interval returning to start position)
+	31interval,never
+		31pattern0,0,2,move,60,0
+		31pattern1,0,2,move,59,0
+		31pattern2,0,2,move,56,0
+		31pattern3,0,2,move,46,0
+		31pattern4,0,2,move,37,0
+		31pattern5,0,2,move,30,0
+		31pattern6,0,2,move,25,0
+		31pattern7,0,2,move,20,0
+		31pattern8,0,2,move,8,0
+		31pattern9,0,2,move,3,0
+		31pattern10,0,2,move,0,0
 }
 
 //Main Character Moving towards the Right
 surface4
 {
-	element0,base,surface1502.png,0,0
+	element0,overlay,surface1502.png,0,0
 
-//moving right
+//start left then moving back to 0 (30interval returning to start position)
 	40interval,never
-		40pattern0,0,2,move,0,0
-		40pattern1,0,2,move,3,0
-		40pattern2,0,2,move,8,0
-		40pattern3,0,2,move,20,0
-		40pattern4,0,2,move,25,0
-		40pattern5,0,2,move,30,0
-		40pattern6,0,2,move,37,0
-		40pattern7,0,2,move,38,0
-		40pattern8,0,2,move,40,0
+		40pattern1,0,100,move,-59,0
+		40pattern2,0,2,move,-56,0
+		40pattern3,0,2,move,-46,0
+		40pattern4,0,2,move,-37,0
+		40pattern5,0,2,move,-30,0
+		40pattern6,0,2,move,-25,0
+		40pattern7,0,2,move,-20,0
+		40pattern8,0,2,move,-8,0
+		40pattern9,0,2,move,-3,0
+		40pattern10,0,2,move,0,0
+	
+//start 0 then moving right
+	41interval,never
+		41pattern0,0,2,move,0,0
+		41pattern1,0,2,move,3,0
+		41pattern2,0,2,move,8,0
+		41pattern3,0,2,move,20,0
+		41pattern4,0,2,move,25,0
+		41pattern5,0,2,move,30,0
+		41pattern6,0,2,move,37,0
+		41pattern7,0,2,move,46,0
+		41pattern8,0,2,move,56,0
+		41pattern9,0,2,move,59,0
+		41pattern10,0,2,move,60,0
 
 }
 
 //Main Character Looking towards upper left
 surface5
 {
-	element0,base,surface1503.png,0,0
+	element0,overlay,surface1503.png,0,0
 }
 
 //Main Character Looking towards upper Right
 surface6
 {
-	element0,base,surface1504.png,0,0
+	element0,overlay,surface1504.png,0,0
 }
 
 //Main Character annoyed pose 
 surface7
 {
-	element0,base,surface1505.png,0,0
+	element0,overlay,surface1505.png,0,0
 	
 //shake side to side
 	70interval,never
@@ -410,7 +440,7 @@ surface7
 //Main Character pissed off
 surface8
 {
-	element0,base,surface1506.png,0,0
+	element0,overlay,surface1506.png,0,0
 
 //shake side to side
 	80interval,never
@@ -428,7 +458,7 @@ surface8
 //Main Character furious pose
 surface9
 {
-	element1,base,surface1507.png,0,0
+	element0,overlay,surface1507.png,0,0
 	
 //shake side to side
 	90interval,never
@@ -446,13 +476,13 @@ surface9
 //Main Character Moving towards the Lower Right
 surface11
 {
-	element1,base,surface1510.png,0,0
+	element0,overlay,surface1510.png,0,0
 }
 
 //Main Character Moving towards lower Right
 surface12
 {
-	element1,base,surface1511.png,0,0
+	element0,overlay,surface1511.png,0,0
 }
 
 
@@ -474,7 +504,14 @@ surface10 //cliffs default skin
 			0pattern5,2003,492,base,0,0
 			0pattern6,2002,16,base,0,0
 			0pattern7,2001,16,base,0,0
-			0pattern8,2001,100,base,0,0
+			0pattern8,2001,20,base,0,0
+			0pattern9,2002,150,base,0,0
+			//make sure after this animation plays it then has the surface 13 playing after it to keep the pose 
+}
+
+surface13 //cliff candle fire small 
+{
+	element0,overlay,surface2002.png,0,0
 }
 
 
@@ -488,7 +525,7 @@ surface10 //cliffs default skin
 //You can use surface.append to technically apply anything across multiple poses.
 
 //sakura collisions-----------------------------------------------------------------
-	//appending surface0, surface8 and surface9 to have the 'head' collision
+	//appending surface0, surface1 and surface2 to have the 'head' collision
 	surface.append0-12,!3-12
 		{
 			collision0,35,82,132,26,Head
@@ -500,7 +537,7 @@ surface10 //cliffs default skin
 			collision0,35,82,132,26,NoPets
 		}
 
-	//appending surface 5 to surface 7 for the 'Eye" collision
+	//appending surface 7 to surface 8 for the 'Eye" collision
 	surface.append7-8
 		{
 			collision0,35,82,132,26,NoPets
@@ -508,7 +545,7 @@ surface10 //cliffs default skin
 		}
 
 //kero 
-	//this is appending this code to Surface11 through Surface14 to have the 'Alter' collision 
+	//this is appending this code to Surface13 to have the 'Alter' collision 
 	surface.append13
 		{
 			collision0,58,189,318,308,Alter

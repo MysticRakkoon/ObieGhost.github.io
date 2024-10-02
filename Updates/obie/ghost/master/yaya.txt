@@ -8,7 +8,7 @@ charset.extension, UTF-8
 //---- Dictionary Files ---------------------------------------------------------------------
 
 dicdir, yaya_base		
-dic, string.dic			
+dic, string.dic			//dont touch any of this
 dic, aitalk.dic			
 dic, bootend.dic		
 dic, mouse.dic			
