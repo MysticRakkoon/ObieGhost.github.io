@@ -1,0 +1,11 @@
+validrect.bottom,582
+
+arrow1.y,586
+
+number.y,584
+
+sstpmessage.y,584
+
+sstpmarker.y,586
+
+onlinemarker.y,0

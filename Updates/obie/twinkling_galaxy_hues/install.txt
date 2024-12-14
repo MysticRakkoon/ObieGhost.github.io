@@ -1,0 +1,4 @@
+charset,UTF-8
+type,balloon
+name,Twinkling Galaxy - Hues
+directory,twinkling_galaxy_hues

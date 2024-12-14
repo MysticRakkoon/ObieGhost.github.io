@@ -18,7 +18,8 @@ OnKeyPress
 //--OnAiTalk
 //Leave this alone. This is mostly setting up whether or not dialogue is in a chain before it displays.
 
-OnAiTalk
+ 
+AiTalk
  {
 	if RAND(100) < communicateratio
  	{
@@ -26,17 +27,39 @@ OnAiTalk
 	}
  	else
 	{
-			if CHAIN.IDName == "" {
- 				lastTalk = RandomTalk
+		if screenboundary == 1 //if the screenboundary check is enabled
+		{
+			if mikireflag == 0 //this checks whether or not he's offscreen, if he isn't then
+			{
+				if CHAIN.IDName == "" 
+					{
+					lastTalk = RandomTalk
+					}
+				else 
+					{
+					lastTalk = ChainTalk
+					}
+				lastTalk
+				}
+			else
+			{ 
+			MikireTalk //if he's off-screen, it'll call this dialogue
 			}
-			else {
-				lastTalk = ChainTalk
-			}
-			lastTalk
+		}
+ 		else //if the screenboundary check is disabled
+		{
+			if CHAIN.IDName == "" 
+				{
+					lastTalk = RandomTalk
+				}
+				else 
+				{
+					lastTalk = ChainTalk
+				}
+				lastTalk
+		}
 	}
  }
- 
-
 
 //--Mikiretalk, or the Off-Screen Boundary Check------------------------------------------------------
 
@@ -121,7 +144,8 @@ RandomTalk : nonoverlap_pool
 	"\0\s[2]'Your folders look tasty...\w4\w2 Can I eat one?"
 	"\0\s[2]\s[6]'The %(usersfolder) looks especially tasty\w6.\w6.\w6.\w6.'\n\n[half]'May I?'"
 	"\0\s[2]'I have been here for %(passmin) minutes.'"
-	"\0\s[0]\i[5]\s[1]\s[4]\i[41]\s[3]\1[31]* (It seems to be exploring your monitor...?)"
+//	"\0\s[0]\i[5]\s[1]\s[4]\i[41]\s[3]\1[31]* (It seems to be exploring your monitor...?)" -trying to get it to move randomly - need to see if there is a better way to get this to work.
+		//this is turning to \s[1] and then moving to the right, turning and then moving to the left back to default position.
 	
 	
 	//"\1\s[10]Here is dialogue referring to Anchor 1.\w8\0\s[0]Here is dialogue referring to Anchor 2 and Anchor 3.\e"

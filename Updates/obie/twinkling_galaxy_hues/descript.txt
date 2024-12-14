@@ -1,0 +1,100 @@
+charset,UTF-8
+use_self_alpha,1
+use_input_alpha,1
+
+type,balloon
+name,Twinkling Galaxy Hues
+
+craftman,Zichqec
+craftmanw,Zichqec
+craftmanurl,https://zichqec.github.io/s-the-skeleton/
+
+homeurl,https://zichqec.github.io/s-the-skeleton/updates/balloons/twinkling_galaxy_hues/
+
+origin.x,7
+origin.y,7
+
+validrect.left,7
+validrect.top,7
+validrect.right,185
+validrect.bottom,182
+
+wordwrappoint.x,220
+wordwrappoint.y,0
+
+font.name,Candara
+font.height,12
+font.color.r,255
+font.color.g,255
+font.color.b,255
+font.bold,0
+
+disable.font.color.r,135
+disable.font.color.g,140
+disable.font.color.b,150
+disable.font.shadowstyle,outline
+
+
+font.shadowcolor.r,0
+font.shadowcolor.g,0
+font.shadowcolor.b,0
+font.shadowstyle,outline
+
+windowposition.x,0
+windowposition.y,0
+
+anchor.font.color.r,172
+anchor.font.color.g,142
+anchor.font.color.b,244
+
+cursor.blendmethod,none
+cursor.style,underline
+
+arrow0.x,186
+arrow0.y,7
+
+arrow1.x,186
+arrow1.y,186
+
+onlinemarker.x,0
+//This bugger right here is causing me so much grief... From what I understand, writing a single - here makes it relative to the bottom right corner of the balloon window, and -- makes it actual negative coordinates.
+//Right so. The star field on my online marker matches the star field of the balloon backgrounds. I have triple checked this, they line up. However, I've set up the online marker larger than the smaller balloon, so that it works on the bigger balloons. Seems to handle this just fine. EXCEPT.
+//FOR SOME GODDAMN REASON THAT I CANNOT UNDERSTAND OR EXPLAIN
+//b4: write 0, all good! Makes sense, this should overlay the whole balloon normally
+//b2: write --200. Makes sense! Display this starting from -200 above the top left corner, that way it still lines up. Works great.
+//b0: if you write --400, IT WILL FLIP THE STAR FIELD BACKWARDS
+//WHY IS IT BACKWARDS
+//BUT GET THIS, GET THIS I AM NOT DONE
+//b2: write -400: FLIPS THE STAR FIELD FOR b2 BACKWARDS
+//b0: write -600: STAR FIELD FOR b0 IS THE RIGHT WAY AROUND
+//none of it makes sense, none of it makes sense and I JUST KNOW that I'm going to report this as a bug and then SSP is going to update and fix it and my balloon will be screwed
+//But if I go with what I think will be correct if it were to be fixed, then I'm gonna end up being wrong
+//Maybe I will just delay the release for a while. Yeah that sounds good. Sad but necessary.
+
+//Update: Is fixed!!! Thank you Ponapalt!!!
+onlinemarker.y,--400
+
+sstpmarker.x,7
+sstpmarker.y,186
+
+sstpmessage.font.height,10
+sstpmessage.font.color.r,150
+sstpmessage.font.color.g,150
+sstpmessage.font.color.b,150
+sstpmessage.x,16
+sstpmessage.y,184
+
+number.font.name,Calibri
+number.font.height,10
+number.font.color.r,100
+number.font.color.g,100
+number.font.color.b,100
+number.xr,183
+number.y,184
+
+communicatebox.x,5
+communicatebox.y,5
+
+communicatebox.width,190
+communicatebox.height,20
+

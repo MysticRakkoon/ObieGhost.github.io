@@ -1,6 +1,19 @@
 ﻿//---------------------------Menus--------------------------
 OpenSakuraMenu //menu open dialogue
 {
+		if negativeact == 1
+		{
+			"\0\s[0]\b2* Sighs\w8\w7\n'Yes %(username)?'"
+		"\0\s[2]\b2'.....?'"
+		"\0\s[2]\b2'Something you need me to aid you in %(username)?'"
+		"\0\s[1]\b2'What?'"
+		"\0\s[1]\b2'What.'"
+		"\0\s[1]\b2'Hmm?'"
+		--
+		MenuRun
+		}
+		else
+		{
 		"\0\s[0]\b2* Sighs\w8\w7\n'Yes %(username)?'"
 		"\0\s[2]\b2'.....?'"
 		"\0\s[2]\b2'Something you need me to aid you in %(username)?'"
@@ -9,6 +22,7 @@ OpenSakuraMenu //menu open dialogue
 		"\0\s[1]\b2'Hmm?'"
 		--
 		MenuRun
+		}
 }
 
 
@@ -17,8 +31,7 @@ MenuRun : all //menu functions
  	wd = GetWeekDay
  	ap = GetAP
 	--
-	"\_q\b2\n\n* You ask Obie to....*\n\n[half]" 
-	//The \n\n means two new lines as detailed in the walkthrough, and \_q means quick session, meaning all the text from this point on will display instantly instead of a few letters at a time like normal ghost dialogue. You can ignore it.
+	"\_q\b2\n\n*  You ask Obie to....\n\n[half]" 
 	--
 	if lastTalk != "" 
 	//What this does is check to see if the ghost has already said a random bit of dialogue on its own, 
@@ -27,19 +40,19 @@ MenuRun : all //menu functions
 	  "\![*]\q[..repeat itself?,OnLastTalk]\n"
 	}
 	--
- 	"\![*]\q[..say something to you?,OnAiTalk]\n\n[half]"
+ 	"\![*]\q[..say something to you?,OnAiTalk]\n"
 	--
-	"\n\q * Or instead you to want to... *\n\n[half]"
-	//"\![*]\q[..say something to another ghost?,OnAiTalk]\n\n[half]" 
-	//uncomment this when adding stuff for it to talk to other ghosts with 
-	
-	//Advanced users, you can add multiple captions for any option you add to a menu you make just like this, 
-	//as long as you separate it from the other options into its own section with two dashes above and below. 
-	//Note that you can't do this if the Function above has ": all" after it, since that will put every potential option in. You'll have to set it your menu up differently to take --s into account. 
-	//I commented it out here because of ": all" above, but you can see the basic idea.
+	"\![*]\q[..ask a question?,obiequestions]\n\n[half]"
+	//--
+	//"\![*]\q[..say something to another ghost?,OnAiTalk]\n\n[half]"  ------ uncomment this when adding stuff for it to talk to other ghosts with 
+	--
+	"\n*  Or maybe instead you want to...\n\n[half]/
+	\![*]\q[...do something?,actmenu]\n/
+	\![*]\q[...give a offering?,itemmenu]\n/
+	\![*]\q[...check your stats?,statcheck]\n\n"
 	--
 	"\![*]\q[..change settings?,configmenu]\n"
-	"\![*]\q[..use functions?,dosomething]\n\n[half]"
+	"\![*]\q[..use functions?,functions]\n\n[half]"
 	
  	"\n\![*]\q[Nevermind.,CANCEL]\n\n\n[half]%(wd) %(nowhour):%(nowmin) %(ap), %(month)/%(day)/%(year)\e"
 }
@@ -98,57 +111,504 @@ nowmin
 }
 
 
-//If someone selects an option linked to BACKTOMENU, it will go back to MenuRun.
-//Advanced users, note that this is formatted as Select.linkedfunction? Remember how it went \q[Displayed Name,linkedfunction] above? When a user clicks an option that doesn't begin with On, 
-//they'll be linked to Select.linkedfunction. Pay close attention as we go through and you'll see this in action.
+//Advanced users, note that this is formatted as Select.linkedfunction? Remember how it went \q[Displayed Name,linkedfunction] above? 
+//When a user clicks an option that doesn't begin with On, they'll be linked to Select.linkedfunction. Pay close attention as we go through and you'll see this in action.
 
-Select.BACKTOMENU
+Select.BACKTOMENU //If someone selects an option linked to BACKTOMENU, it will go back to MenuRun.
 	{
 		MenuRun
 	}
 
-//If someone selects configmenu, this will lead to TalkConfig.
-Select.configmenu
+Select.obiequestions
+	{
+		QuestionsForObie
+	}
+
+Select.actmenu
+	{
+		ActMenu
+	}
+
+Select.itemmenu
+	{
+		OfferingsMenu
+	}
+
+Select.statcheck
+	{
+		CheckStats
+	}
+
+Select.configmenu //If someone selects configmenu, this will lead to TalkConfig.
 	{
 		TalkConfig
 	}
 
 //*********************Advanced User Info*******************************
 //Some of you may be wondering why some of these Select.options lead to another function. Why not just put the config menu coding under Select.configmenu, instead of linking to TalkConfig?
-//Basically any function that's preceded with Select. is limited in its complexity and can only be called within its own .dic file in my experience. Why should you care, you ask? Well, if you're going to link to this function any other way, such as linking it in other .dic files or as a page in a menu, it needs to be a stand-alone function so it can be properly called. I'm pretty sure.
-//The basic jist is this; if you're going to reuse whatever it is the option leads to, you should make it its own function. Otherwise, you can leave it in Select.option. As a rule of thumb I'd probably put any complicated stuff in its own function, then use the Select.option to call the full function as you can see above. Simple dialogue responses to a choice can stay as a Select.option though (Like "Do you like going to raves and partying? Yes/No"). Study what stays as a Select.option and what links to another Function as we go through the file.
+//Basically any function that's preceded with Select. is limited in its complexity and can only be called within its own .dic file in my experience. 
+//Why should you care, you ask? Well, if you're going to link to this function any other way, such as linking it in other .dic files or as a page in a menu, 
+//it needs to be a stand-alone function so it can be properly called. I'm pretty sure.
+//The basic jist is this; if you're going to reuse whatever it is the option leads to, you should make it its own function. Otherwise, you can leave it in Select.option. 
+//As a rule of thumb I'd probably put any complicated stuff in its own function, then use the Select.option to call the full function as you can see above. 
+//Simple dialogue responses to a choice can stay as a Select.option though (Like "Do you like going to raves and partying? Yes/No"). 
+//Study what stays as a Select.option and what links to another Function as we go through the file.
 //***********************************************************************
 
-//--TalkConfig
-//This menu allows the user to change their name and other information, as well as put in their birthday and change how often the ghost speaks. 
-//You can restructure how this looks if you want, but it's perfectly functional as is. 
 
-TalkConfig : all
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//--QuestionsForObie-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+QuestionsForObie : all
 {
 	"\0\b[2]\_q\" 
-	//This bit of dialogue sets up a large balloon and a quick session, like above, so all the text will appear immediately. 
-	//The rest is formatted to display the information and options to change it. I wouldn't touch any of it if you don't know what you're doing.
-	//I'll briefly explain the font tags I used here. \f[bold,1] turns bold on, \f[bold,0] turns it off, not unlike a <b> tag. 
-	//\f[sup,1] turns superscript on (making it tiny and above the text) and \f[sup,0] turns it off. I touch on these tags in the walkthrough on SakuraScript.
+	"*  You ask Obie about...\w5\n\n\_q"
+	--
+		"\![*]\q[..Itself?,talkaboutself] \![*]\q[..Its past,talkaboutpast?]\n/
+		\![*]\q[..Its home?,talkaboutalter] \![*]\q[Its SOUL,talkaboutsoul]\n/
+		\![*]\q[..Others like Obie?,talkaboutothers]\n/
+		\![*]\q[..Yourself?,talkaboutyou] \![*]\q[..Humans?,talkabouthumans]\n/
+		\![*]\q[..Your computer?,whatyouaredoing]\n/
+		\![*]\q[..The Townfolk?,talkabouttownfolk]\n/
+		\![*]\q[..Magic?,talkaboutmagic]\n\n/"
+	--
+	"\![*]\q[Nevermind,Cancel]\e"
+}
+//if any of the above was selected
+Select.talkaboutself
+	{
+		SelfAnswer
+	}
+
+Select.talkaboutpast
+	{
+		PastAnswer
+	}
+
+Select.talkaboutalter
+	{
+		AlterAnswer
+	}
+
+Select.talkaboutothers
+	{
+		OthersAnswer
+	}
 	
-	"f[bold,1]Your name:\f[bold,0] %(username) \f[sup,1](\q[Rename?,TEACHNAME])\f[sup,0]\n"
+Select.talkaboutsoul
+	{
+		SoulAnswer
+	}
 	
-	"\f[bold,1]Your pronouns:\f[bold,0] %(heshe)/%(himher)/%(hisher) \f[sup,1](\q[Change?,TEACHPRONOUN])\f[sup,0]\n"
+Select.talkaboutyou
+	{
+		YouAnswer
+	}
 	
-	"\n\f[bold,1]Your birthday:\f[bold,0] %(birthdayprint) \f[sup,1](\q[Change?,TEACHBDAY])\f[sup,0]\n"
+Select.whatyouaredoing
+	{
+		WhatYouAreDoingAnswer
+	}
 	
-	"\n\f[bold,1]Talking Rate:\f[bold,0] - every %(talktime) \f[sup,1](\q[Change?,talkinter])\f[sup,0]\n\n"
+Select.talkaboutmagic
+	{
+		MagicAnswer
+	}
 	
+Select.talkabouttownfolk
+	{
+		OwnFolkAnswer
+	}
+	
+Select.talkabouthumans
+	{
+		HumansAnswer
+	}
+
+//The above dialouge when clicked
+SelfAnswer
+	{
+		if petobie <= 50 && punchobie == 0
 		{
-		"\![*]\f[bold,1]Enable Uninstall option? (NOW : %(deleteshitai))\n\q[ON,deleteon] \q[OFF,deleteoff]\n\n[half]\n"
+			"\0\s[6]'I actually like the pets.'"
+			--
+			"%(AskReturn)"
 		}
+		elseif petobie == 0 && punchobie <= 2
+		{
+			"\0\s[7]'I don't like being punched.'"
+			--
+			"%(AskReturn)"
+		}
+		else
+		{
 		
+		"\0\s[2]'I think you know everything you need to know about me.'"
+		--
+		"%(AskReturn)"
+		
+		}
+	}
+
+PastAnswer
+	{
+			"\0\s[1]'My past is nothing special.'"
+			"\0\s[2]'I think you know everything you need to know about me.'"
+			--
+			"%(AskReturn)"
+	}
+
+AlterAnswer
+	{
+			"\0\s[1]'Oh that?'\w8\5\w2\s[1]'Don't mind that."
+			"\0\s[5]'Nothing to see here\w3.\w3.\w3.'\w8\w8\5\s[2]\i[26]\n\n[half]'Just focus over here!"
+			--
+			"%(AskReturn)"
+	}
+
+OthersAnswer
+	{
+		if petobie == 0 && punchobie <= 5
+		{
+			"\0\s[2]'I am not telling you.'"
+			--
+			"%(AskReturn)"
+		}
+		else
+		{
+			"\0\s[11]'I haven't seen many others around as of recently.'"
+			--
+			"%(AskReturn)"
+		}
+	}
+
+SoulAnswer
+	{
+			"\0\s[0]'Rude.'"
+			"\0\s[2]'Why do you want to know??'"
+			"\0\s[12]'Who said I had one?'"
+			--
+			"%(AskReturn)"
+	}
+
+YouAnswer
+	{
+		if petobie <= 20 && punchobie >= 1
+		{
+			"\0\s[2]'You can't keep your hands to yourself it seems.'"
+			"\0\s[2]'You enjoy touching my exterior?'"
+			"\0\s[2]'You like to give me headpats?'"
+			--
+			"%(AskReturn)"
+		}
+		elseif petobie >= 3 && punchobie >= 1
+		{
+			"\0\s[2]'You can't keep your hands to yourself it seems.'"
+			--
+			"%(AskReturn)"
+
+		}
+		elseif petobie >= 2 && punchobie <= 8
+		{
+			"\0\s[7]'You are violent. I feel sorry for any animals in your care.'"
+			"\0\s[2]'You can't keep your hands to yourself.'"
+			"\0\s[1]'You like to punch things...'"
+			--
+			"%(AskReturn)"
+		}
+		else
+		{
+			"\0\s[5]'You seem okay.\w8\w6'I guess?'"
+			--
+			"%(AskReturn)"
+		}
+	}
+
+WhatYouAreDoingAnswer
+	{
+			"\0\s[5]*  (Is it ignoring you?)"
+			--
+			"%(AskReturn)"
+	}
+	
+MagicAnswer
+	{
+			"\0\s[1]'I'm ot sure what you are asking me about...'"
+			--
+			"%(AskReturn)"
+	}
+
+OwnFolkAnswer
+	{
+		if petobie >= 3 && punchobie >= 10
+		{
+			"\0\s[7]'Why?\w2So you can punch them too?'"
+			--
+			"%(AskReturn)"
+		}
+		else
+		{
+		"\0\s[2]'I don't have much to say about them.\w8 I haven't really spoke to them before...'"
+		"\0\s[2]'\w2.\w3.\w3.\w3They tend to leave nice things to feast on?'"
+		--
+			"%(AskReturn)"
+		}
+	}
+
+HumansAnswer
+	{
+		if petobie >= 3 && punchobie <= 3
+		{
+			"\0\s[7]'Why?\w2So you can punch them too?'"
+			--
+			"%(AskReturn)"
+		}
+		else
+		{
+			"\0\s[2]'I don't have much to say about humans.\w8 I haven't really spoke to them before...'"
+			"\0\s[2]'\w2.\w3.\w3.\w3They tend to leave nice things to feast on?'"
+			--
+			"%(AskReturn)"
+		}
+	}
+	
+
+AskReturn	//the end bit rerouting you back to the question menu or the cancel menu 
+{	
+	"\w5\n\n\![*]\q[Ask something else?,obiequestions]\n\![*]\q[Finished?,CANCEL]\e"
+	
+
+
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+}//--ActMenu-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ActMenu : all
+{
+	"\0\b[2]\_q\" 
+	""
+	--
 	"\![*]\q[Nevermind,BACKTOMENU]\e"
 }
 
 
 
-//-----PRONOUNS-----------------------------------------------------------------
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//--OfferingsMenu-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+OfferingsMenu : all
+{
+	"\0\b[2]\_q\" 
+	"*  You decide to give Obie...\w5\n\n\_q"
+	--
+		"\![*]\q[..Itself,giveitobie]\n/
+		\![*]\q[..A teddy bear,giveteddybear]\n/
+		\![*]\q[..A slice of cake,givesliceofcake]\n/ 
+		\![*]\q[..A mug of coffee,givecoffee]\n/
+		\![*]\q[..Yourself?,giveyourself]\n/
+		\![*]\q[..A cat?,giveacat]\n/
+		\![*]\q[..A granola bar?,givegranolabar]\n/
+		\![*]\q[..What's in your pockets,givecrumbs]\n\n/"
+	--
+	"\![*]\q[Go Back,BACKTOMENU] \![*]\q[Nevermind.,CANCEL]\e"
+}
+
+Select.giveitobie
+{
+	GiveItObie
+}
+
+GiveItObie
+{
+	"\0\1\b[2]\_q\" 
+	"* You explain that you want to give it an offering,\w7 and that offering is infact itself...\n\n[half]\w4\1\s[10]\i[0]\w8\w8\w8\w8\1\s[13]"
+	--
+	"\0\s[idlepose]'Oh don't be ridiculous!\w2 You can't give me an offering that is myself!'\s[2]\n'Don't make me laugh.'"
+	"\0\s[idlepose]'What a silly thought.'"
+	"\0\s[idlepose]'What a funny idea!\w6 It's not feasible,\w2 but it is a funny idea.'"
+	"\0\s[idlepose]'Ha! You're not the first to try that.'"
+	--
+	"\n\n[half] \![*]\q[Main Menu,BACKTOMENU]\n \![*]\q[Give something else?,itemmenu]\n \![*]\q[Nevermind.,CANCEL]\e"
+}
+
+Select.giveteddybear
+{
+	GiveTeddyBear
+}
+
+GiveTeddyBear
+{
+	"\0\1\b[0]\_q\" 
+	"* You place a teddy bear on the alter\n\n[half]\w4\1\s[10]\i[0]\w8\w8\w8\w8\1\s[13]"
+	--
+	"\0\s[1]'What a cute offering!'"
+	--
+	"\n\n[half] \![*]\q[Main Menu,BACKTOMENU]\n \![*]\q[Give something else?,itemmenu]\n \![*]\q[Nevermind.,CANCEL]\e"
+}
+
+Select.givesliceofcake
+{
+	GiveSliceOfCake
+}
+
+GiveSliceOfCake
+{
+	"* You place a slice of cake on the alter\n\n[half]\w4\1\s[10]\i[0]\w8\w8\w8\w8\1\s[13]\0\s[idlepose]"
+	--
+	"\0\s[1]'What a tasty offering!'"
+	"\0\s[2]'Oh, I can't wait to eat this!'"
+	"\0\s[1]'This is going to be delicious...'\n\s[2]'Thank you.'"
+	"\0\s[0]'I don't know where you had that stored but I am happy for the offering!'"
+	--
+	"\n\n[half] \![*]\q[Main Menu,BACKTOMENU]\n \![*]\q[Give something else?,itemmenu]\n \![*]\q[Nevermind.,CANCEL]\e"
+}
+
+Select.givecoffee
+{
+	GiveCoffee
+}
+
+GiveCoffee
+{
+	"* You place a cup of coffee on the alter\n\n[half]\w4\1\s[10]\i[0]\w8\w8\w8\w8\1\s[13]\0\s[idlepose]"
+	--
+	"\0\s[idlepose]'I believe that you humans like to drink this for engergy?\w4 Well, thanks anyways.'"
+	"\0\s[2]'Warm drinks are the best in the mornings and evenings.'"
+	--
+	"\n\n[half] \![*]\q[Main Menu,BACKTOMENU]\n \![*]\q[Give something else?,itemmenu]\n \![*]\q[Nevermind.,CANCEL]\e"
+}
+
+Select.giveyourself
+{
+	GiveYourSelf
+}
+
+GiveYourSelf
+{
+	"* You tell Obie you want to give yourself to it\n\n[half]\w4\1\s[10]\i[0]\w8\w8\w8\w8\1\s[13]"
+	--
+	"\0\s[idlepose]'Oh!..'\n\w6\s[7]'Uhh...\w8\w8 I don't accept..?'"
+	"\0\s[idlepose]'That's not-\w6 I don't think-\w4\w2 that's a little strange don't you think?'"
+	"\0\s[2]* It stares at you\n\n[half]'...That's not going to work...'"
+	--
+	"\n\n[half] \![*]\q[Main Menu,BACKTOMENU]\n \![*]\q[Give something else?,itemmenu]\n \![*]\q[Nevermind.,CANCEL]\e"
+}
+
+Select.giveacat
+{
+	GiveACat
+}
+
+GiveACat
+{
+	"* You put a cat on the alter\n\n[half]\w4\1\s[10]\i[0]\w8\w8\w8\w8\1\s[13]\0\s[0]"
+	--
+	"\0\s[idlepose]'Oh!..'\n\w6\s[2]'Uhh...\w8\w8Take it back.'"
+	"\0\s[idlepose]'This is going to be tasty to eat!'"
+	"\0\s[2]* It stares at you\n\n[half]'...I can and will eat this... You do know that right?'"
+	--
+	"\n\n[half] \![*]\q[Main Menu,BACKTOMENU]\n \![*]\q[Give something else?,itemmenu]\n \![*]\q[Nevermind.,CANCEL]\e"
+}
+
+Select.givegranolabar
+{
+	GiveGranolaBar
+}
+
+GiveGranolaBar
+{
+	"* You put a granola bar the alter\n\n[half]\w4\1\s[10]\i[0]\w8\w8\w8\w8\1\s[13]"
+	--
+	"\0\s[idlepose]'Oh!..'\n\w6\s[7]'Uhh...\w8\w8 I don't accept..?'"
+	"\0\s[idlepose]'That's not-\w6 I don't think-\w4\w2 that's a little strange don't you think?'"
+	"\0\s[2]* It stares at you\n\n[half]'...That's not going to work...'"
+	--
+	"\n\n[half] \![*]\q[Main Menu,BACKTOMENU]\n \![*]\q[Give something else?,itemmenu]\n \![*]\q[Nevermind.,CANCEL]\e"
+}
+
+Select.givecrumbs
+{
+	GiveCrumbs
+}
+
+GiveCrumbs
+{
+	"* You fish through your pockets for something to give...\w8\w8\w5 You find a few crumbs and a paperclip and put it on the alter\n\n[half]\1\s[10]\i[0]\w8\w8\w8\w8\1\s[13]\w4"
+	"* You look though you pockets...\w8\w8\w5 You find nothing... You decide to try and give 'nothing'\n\n[half]\w4\1\s[10]\i[0]\w8\w8\w8\w8\1\s[13]\0\s[idlepose]"
+	--
+	"\0\s[idlepose]'Oh!..'\n\w6\s[7]'Uhh...\w8\w8 I don't accept..?'"
+	"\0\s[idlepose]'That's not-\w6 I don't think-\w4\w2 that's a little strange to give don't you think?'"
+	"\0\s[2]* It stares at you\n\n[half]'...That's not going to work...'"
+	--
+	"\n\n[half] \![*]\q[Main Menu,BACKTOMENU]\n \![*]\q[Give something else?,itemmenu]\n \![*]\q[Nevermind.,CANCEL]\e"
+}
+
+
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//--CheckStats-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CheckStats : all
+{
+	"\0\b[2]\_q\" 
+	"*  You've pet Obie %(petobie) times.\n"
+	"*  You've punched Obie %(punchobie) times.\n"
+	--
+	"\n\![*]\q[Nevermind,BACKTOMENU]\e"
+}
+
+//----Integer Check -- not sure if this works
+//Hopefully this'll help keep key stats from randomly becoming strings for no reason...
+
+IntCheck
+{	
+	petobie = TOINT(petobie)
+	punchobie = TOINT(punchobie)
+	positiveact = TOINT(positiveact)
+	negativeact = TOINT(negativeact)
+}
+
+
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//--TalkConfig-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+TalkConfig : all
+{
+	"\0\b[2]\_q\" 
+	//This bit of dialogue sets up a large balloon and a quick session, like above, so all the text will appear immediately. 
+	//I'll briefly explain the font tags I used here. \f[bold,1] turns bold on, \f[bold,0] turns it off, not unlike a <b> tag. 
+	//\f[sup,1] turns superscript on (making it tiny and above the text) and \f[sup,0] turns it off. I touch on these tags in the walkthrough on SakuraScript.
+	
+	"f[bold,1]Your name:\f[bold,0] %(username) \f[sup,1](\q[Rename?,TEACHNAME])\f[sup,0]\n"
+	--
+	"\f[bold,1]Your pronouns:\f[bold,0] %(heshe)/%(himher)/%(hisher) \f[sup,1](\q[Change?,TEACHPRONOUN])\f[sup,0]\n"
+	--
+	"\n\f[bold,1]Your birthday:\f[bold,0] %(birthdayprint) \f[sup,1](\q[Change?,TEACHBDAY])\f[sup,0]\n"
+	--
+	"\n\f[bold,1]Talking Rate:\f[bold,0] - every %(talktime) \f[sup,1](\q[Change?,talkinter])\f[sup,0]\n"
+	--
+	"\n\f[bold,1]Screen Boundary Check: %(screennotif) \f[sup,1](\q[Change,screennotice]?)\f[sup,0]\n\n"
+	--
+		{
+		"\![*]\f[bold,1]Enable Uninstall option? (NOW : %(deleteshitai))\n\q[ON,deleteon] \q[OFF,deleteoff]\n\n[half]\n"
+		}
+	--
+	"\![*]\q[Nevermind,BACKTOMENU]\e"
+}
+
+
+
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-----PRONOUNS----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 //This and the next few set up the pronouns, as you can see by the linkedfunction names. leave the rest of it alone.
 
@@ -201,6 +661,9 @@ Select.choiceneither
 
 
 
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //-----Ghost Deletion---------------------------------------------------------------------------------------------------------------------------
 
 //These two options toggle whether or not you can delete your ghost. Leave them alone.
@@ -218,6 +681,9 @@ Select.deleteoff
 
 
 
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //----Birthday------------------------------------------------------------------------------------------------------------------------------------------------
 //This next set of functions handles inputting the user's birthday. 
 
@@ -227,7 +693,6 @@ Select.TEACHBDAY
 				
 		//*********************Advanced User Info*******************************
 		//I also touched on this in bootend.dic and explained it in the walkthrough page on coding, but I'll also go into it here. 
-		//I'm going to break down the tag there at the end of the sentence so you know what it's doing. 
 		//Basically, \! means a function is going to happen, open tells it to open something, inputbox tells it to open an input box, 
 		//and OnUserBornMonth is the function the input box will be linked to, which is just below here. -1 means the input box should not time out. 
 		//If you want to add input boxes to some new function for whatever reason, you should follow this basic format.
@@ -237,8 +702,7 @@ Select.TEACHBDAY
 	}
 
 //--OnUserBornMonth
-//This takes the value that the user put into the input box above and evaluates it. 
-OnUserBornMonth
+OnUserBornMonth //This takes the value that the user put into the input box above and evaluates it. 
 {
 	_tempmonth = TOSTR(reference0) //this stores what the user put in as a variable called _tempmonth
 	_tempmonth = TOLOWER(_tempmonth) //changes it to lowercase
@@ -342,8 +806,11 @@ birthchecked
 }
 
 
-//--------------------------------------------------------------------------------------------------------------------------
-//--Talk Rate---------------------------------------------------------------------------------------------------------------
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//--Talk Rate-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //This is when the user chooses to adjust the talk rate in the config menu. The talk rate is how often the ghost will read some dialogue from aitalk.dic.
 
 Select.talkinter : all
@@ -435,6 +902,53 @@ Select.TALKNONE
 	}
 
 
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//---------Screen Boundary Check Toggle-----------------------------------------------------------------------------------------------------------------------
+
+screennotif
+{
+	if screenboundary != 0
+	{
+		screennotifsetting = "ON"
+		screenboundary = 1
+		
+		"%(screennotifsetting)"
+	}
+	else
+	{
+		screennotifsetting = "OFF"
+		screenboundary = 0
+		
+		"%(screennotifsetting)"
+	}
+}
+
+Select.screennotice
+{
+	"\_q*  This will change whether or not Obie will check if he's too close to the edge of your monitor and say it's off-screen.\n\n/
+	\![*]\q[Check it,yestoscreen]\n\![*]\q[Don't check it,notoscreen]\n\n\![*]\q[Nevermind,TalkConfig]\e"
+}
+
+Select.yestoscreen
+{
+	screennotifsetting = "ON"
+	screenboundary = 1
+	TalkConfig
+}
+
+Select.notoscreen
+{
+	screennotifsetting = "OFF"
+	screenboundary = 0
+	TalkConfig
+}
+
+
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //---------CHANGE NAME-----------------------------------------------------------------------------------------------------------------------
 //This is when the user chooses to change their name. It's linked to the functions outlined in nameteach.dic. Nothing to touch here.
 Select.TEACHNAME
@@ -442,6 +956,10 @@ Select.TEACHNAME
 		OnTeachName	
 	}
 
+
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //--------cancel----------------------------------------------------------------------------------------------------------------------------------------
 //If the user selects cancel in a menu.
 Select.CANCEL
@@ -454,21 +972,14 @@ Select.CANCEL
  	}
 
 	
-//In the MenuRun function above, if someone selects Functions (linked to dosomething), it will take them here to Select.dosomething.
 
-//If you want to have your ghost pick from multiple intro lines for this menu, you can uncomment FunctionMenuIntros here, and add in dialogue as you like.
 
-// FunctionMenuIntros : nonoverlap
-// {	
-		// //I mentioned this above in MenuRun, but you can have a set of multiple different responses that may randomly appear when the menu is opened. Try opening this menu yourself with the template to see how it works. The character will randomly choose one line as the intro. 
-		// //If you don't want to deal with this, just delete the extra lines and leave one. Otherwise, replace the dialogue below as you like, but note that they don't end with \e here.
-		
-		// "\0\s[0]\b2This is the first function menu intro.\n\n"
- 		// "\0\s[0]\b2This is the second function menu intro.\n\n"
-		// "\0\s[0]\b2This is the third function menu intro.\n\n"	
-// }
 
-Select.dosomething : all
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//--------functions----------------------------------------------------------------------------------------------------------------------------------------
+//If the user selects the 'use functions' button in a menu.
+
+Select.functions : all
 {
  		FunctionMenuIntros	
 		"\n[half]\_q\b2\0\s[2]'What do you want me to do for you this time?'\n\n[half]*You ask Obie to...?*\n\n"
@@ -483,12 +994,11 @@ Select.dosomething : all
 		"\![*]\q[Update,keroupdatecheck]\n"
 		"\![*]\q[System Info,ChoiceSystemInformation]\n\n"
 		
-//		"\![*]\q[Test variable,testvariable]\n\n"
-	//uncommment this ^^ When you are done with the test variable, 
-	//aka your ghost is finished or you just don't want it showing up when you publish your ghost beta or whatevs, 
-	//simply add two // slashes in front of "\![*]\q[Test variable,testvariable]\n\n" to comment the line out. 
-	//In Notepad++, it will turn green. When you want to use it again, erase the two slashes to turn it back to normal.
-
+		if username == "Rakkoon" //this will only show if the username is rakkoon
+		{
+		"\![*]\q[Test variable,testvariable]\n\n"
+		}
+		--
 		
  		"\![*]\q[Back to the Main Menu,BACKTOMENU]\e"
 }
@@ -508,10 +1018,9 @@ Select.sspconfig
 
 Select.ChoiceGarbagecan
 {
-	_gomicheck = FUNCTIONEX("gomi.dll", "-n")	
-	//Don't touch this line. for those curious, it's referencing a SAORI, which are optional user-made plug-in dlls you can download to enable different functions on your ghost. 
-	//gomi.dll is one included with this template. All SAORI are in Japanese (maybe Korean or Chinese as well idk) and many have disappeared by now, so don't concern yourself very much with SAORI. 
-	//They're for skilled developers, mostly.
+	_gomicheck = FUNCTIONEX("gomi.dll", "-n")	//Don't touch this line. 
+	//for those curious, it's referencing a SAORI, which are optional user-made plug-in dlls you can download to enable different functions on your ghost. gomi.dll is one included with this template. 
+	//All SAORI are in Japanese (maybe Korean or Chinese as well idk) and many have disappeared by now, so don't concern yourself very much with SAORI. 
 	
 	if _gomicheck == 0 //If the recycle bin is empty.
 	{
@@ -522,7 +1031,6 @@ Select.ChoiceGarbagecan
 		"\0\s[2]'Emptying the recycle bin.'\w8\0\s[1]'Be right back.'\w8\w8\s[-1]\w8\w8\w8\w8\w8\![raise,OnGarbagecanEmpty]\w9\w9\w9\0\s[2]\c'Done.'\e"
 		
 		"\0\s[2]'I am going to enjoy harvesting and eating your files now.'\w8\0\s[1]'Be right back.'\w8\w8\s[-1]\w8\w8\w8\w8\w8\![raise,OnGarbagecanEmpty]\w9\w9\w9\0\s[2]\c'That was delicious.'\e"
-
 		
 		"\0\s[2]'I'll be back in a second.'\w8\w8\s[-1]\w8\w8\w8\w8\w8\w8\w8\![raise,OnGarbagecanEmpty]\w9\w9\w9\0\s[5]\c'Finished.'\e"
 	}
@@ -571,7 +1079,7 @@ OnChoiceTimeout
 //This is when they select bug report. This is mostly meant to briefly give the user information about you, the creator, and how to report a problem to you. This can be handy if the person forgot where they got their ghost or how to contact you. Add whatever info you like here.
 Select.bugreport
 {
-"\0\s[2]'Report bugs to mysticrakkoon@gmail.com \w5I was downloaded from \_a[http://www.whereveryoupostedthem.com/]some \_a.'\e"
+"\0\s[2]'Report bugs to mysticrakkoon@gmail.com \w5I was downloaded from \_a[https://github.com/MysticRakkoon/ObieGhost.github.io/issues \_a.'\e"
 }
 
 //When clicked, this will automatically tell the ghost to check for updates. More detail on updates in etc.dic. You can leave this alone.
@@ -595,8 +1103,6 @@ Select.testvariable
 
 
 //this is just here incase I want to do something with this later
-
- 
 //---- Secondary Character Menu ---------------------------------------------------------
 //KeroMenuIntros : nonoverlap
 //{

@@ -102,7 +102,7 @@ surface0
 //Main Character Flipped base pose
 surface1
 {
-	element0,overlay,surface1509.png,0,0
+	element0,base,surface1509.png,0,0
 	
 //--Obie Random Blink----------------------------
 	11interval,random,250
@@ -220,7 +220,7 @@ surface1
 //Main Character frontal Pose
 surface2
 {
-	element0,overlay,surface1508.png,0,0
+	element0,base,surface1508.png,0,0
 
 //--Obie Random Blink----------------------------
 	21interval,random,250
@@ -342,7 +342,7 @@ surface2
 //Main Character Moving towards the left
 surface3
 {
-	element0,overlay,surface1501.png,0,0
+	element0,base,surface1501.png,0,0
 	
 //start 0 then moving left
 	30interval,never
@@ -410,19 +410,19 @@ surface4
 //Main Character Looking towards upper left
 surface5
 {
-	element0,overlay,surface1503.png,0,0
+	element0,base,surface1503.png,0,0
 }
 
 //Main Character Looking towards upper Right
 surface6
 {
-	element0,overlay,surface1504.png,0,0
+	element0,base,surface1504.png,0,0
 }
 
 //Main Character annoyed pose 
 surface7
 {
-	element0,overlay,surface1505.png,0,0
+	element0,base,surface1505.png,0,0
 	
 //shake side to side
 	70interval,never
@@ -440,7 +440,7 @@ surface7
 //Main Character pissed off
 surface8
 {
-	element0,overlay,surface1506.png,0,0
+	element0,base,surface1506.png,0,0
 
 //shake side to side
 	80interval,never
@@ -458,7 +458,7 @@ surface8
 //Main Character furious pose
 surface9
 {
-	element0,overlay,surface1507.png,0,0
+	element0,base,surface1507.png,0,0
 	
 //shake side to side
 	90interval,never
@@ -476,13 +476,13 @@ surface9
 //Main Character Moving towards the Lower Right
 surface11
 {
-	element0,overlay,surface1510.png,0,0
+	element0,base,surface1510.png,0,0
 }
 
 //Main Character Moving towards lower Right
 surface12
 {
-	element0,overlay,surface1511.png,0,0
+	element0,base,surface1511.png,0,0
 }
 
 
@@ -511,7 +511,7 @@ surface10 //cliffs default skin
 
 surface13 //cliff candle fire small 
 {
-	element0,overlay,surface2002.png,0,0
+	element0,base,surface2002.png,0,0
 }
 
 
@@ -583,10 +583,6 @@ surface13 //cliff candle fire small
 			mouseup4,Alter,system:hand 
 			mousedown4,Alter,system:grip
 		}
-//What this does is change the mouse cursor. You can see it's split into mouseup and mousedown, and it uses the names you gave your Collisions up there. 
-//You can keep adding unique cursors for all your collisions by sequentially numbering them, like mouseup/down2, mouseup/down3, and so on.
-//The system cursors you can use for this are "arrow", "cross", "no", "hand", "grip", "finger", "wait", "text", "move", and "help". 
-
 
 //--Hover over hit box Tooltips------------------
 
@@ -605,14 +601,16 @@ kero.tooltips
 
 //--Surface.alias------------------
 //What it does is assign a range of numbers to a single number or word that can be called using \s[].
-
 //this is something i might play around with more later
 
-//sakura.surface.alias
-	//{
-	//Randomized angry poses
-		//randangry,[1505,1506,1507]
-	//}
+sakura.surface.alias
+	{
+	Randomized angry poses
+		angrypose,[7,8,9]
+		
+	Randomized idle poses
+		idlepose,[0,1,2]
+	}
 
 //What this means is that I could then go \s[6666] in dialogue and it would call any of these four Surfaces in the brackets. You can do words as well, like creepy,[1229,1230,1231,1235], and then you could call it with \s[creepy]. This may sound like a convenient shortcut to using words instead of numbers for your ghost's expressions, but I'd probably stick with numbers, really. It just feels like it'd backfire on you eventually.
 //You can do the same thing with the side character by using kero instead of sakura.

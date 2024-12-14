@@ -14,4 +14,4 @@ shiori,yaya.dll
 
 icon,obie_icon_1.ico
 
-balloon,cosmic_pixel_4_cyan
+balloon,twinkling_galaxy_hues //change this for a new default balloon. Make sure to have the default balloon file folder in the ghost files or it wont set up properly

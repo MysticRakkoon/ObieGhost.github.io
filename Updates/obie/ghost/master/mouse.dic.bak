@@ -34,15 +34,23 @@ MouseMoveSakura
  			stroke = 0 //resetting the stroke count
 			if reference4 == "Head" //collision for the head
  			{
+				positiveact += 1
+				petobie += 1
+				
 				"\0\s[12]'Mmmm.'\n\n*It seems like it enjoys your touch.\e"
-				"\0\s[2]*As you pet it you can feel vibrations under it's metal surface.\n\n'......'\e"
-				"\0\s[2]*You feel the vibrating metal that covers Obie.\n'If only you could feel me actually... I wonder what would be our size difference then!'\n\n[half]\s[1]*A chuckling rumble vibration comes from it.\e"
+				"\0\s[2]\i[26]*As you pet it you can feel vibrations under it's metal surface.\n\n'......'\e"
+				"\0\s[2]\i[26]*You feel the vibrating metal that covers Obie.\n'If only you could feel me actually... I wonder what would be our size difference then!'\n\n[half]\s[1]*A chuckling rumble vibration comes from it.\e"
 				"\0\s[1]'That feels nice. It's been awhile since a sentient being touched me.'\e"
 				"\0\s[2]\i[24]'Don't you ever get tired of petting me!?'\e"
 				"\0\s[11]'Not right now.'\e"
+				"\0\s[12]'No thanks.'\e"
  			}
  			elseif reference4 == "NoPets"
  			{
+				positiveact -= 1
+				negativeact += 1
+				petobie += 1
+				
 				"\0\s[7]'Do you know how to keep your hands to yourself?'\e"
 				"\0\s[7]\i[70]'Do you know how to keep your hands to yourself?'\e"
  				"\0\s[8]*It doesn't seem to be a good idea to pet it right now.\n\n\_q'S T O P.'\e"
@@ -130,9 +138,12 @@ MouseDoubleClickSakura
  {
  	if reference4 == "Head" || reference4 == "NoPets"
 	{
+		negativeact += 1 
+		punchobie += 1
+
 		"\0\s[2]'Don't break your ligaments.'\n'There might be more use for them rather than breaking them against my body.'\e"
 		"\0\s[7]'Try that again.'\n'I want to see if you can really hurt yourself.'\e"
-		"\0\s[0]'Doesn't hurt if that's what you're checking.'\e"
+		"\0\s[0]'Doesn't hurt me if that's what you're checking.'\e"
  	}
 	else
  	{
@@ -149,13 +160,56 @@ MouseDoubleClickKero
  {
  	if reference4 == "Body"
 	{
-		//Replace with Cliff asking if user wants to give an offering to Obie
+		"\1\s[10]*  Would you like to give Obie an offering?\n\n/
+		\![*]\f[bold,1]\q[Yes,itemmenu]\f[bold,0] or \![*]\f[bold,1]\q[No,CANCEL]\f[bold,0]\n\n[half]/
+		\![*]\q[Nevermind,CANCEL]\e"
+ 	}
+	elseif reference4 == "Alter"
+	{
+		"\1\s[13]*  Are you sure you want to take away the offering?\n\n/
+		\![*]\f[bold,1]\q[Yes,yestakeoffering]\f[bold,0] or \![*]\f[bold,1]\q[No,notakeoffering]\f[bold,0]\n\n[half]/
+		\![*]\q[Nevermind,CANCEL]\e"
  	}
 	else
  	{
 	}
  }
- 
- //*********************Advanced User Info*******************************
- //There are other mouse related functions you could set up much like the above, such as OnMouseDragStart, OnMouseDragEnd, OnMouseWheel, and others which correspond to various things you can do with your mouse. You can probably guess what those functions do just by their names - OnMouseWheel would be if someone spun their mouse wheel over a certain area, for example. If you're interested in these, I'd recommend doing some reading at the CROW-SSP Encyclopedia to get a better idea of them and settle down for some trial and error learning as you try to put them in.
- //***********************************************************************
+
+//-------if the above options was selected 
+Select.yestakeoffering
+{
+	negativeact += 1
+	
+	"*  You decide to take the offering from Obie...\w8\w7\n\n\_q"
+	"*  You decide to take the offering from the Alter...\w8\w7\n\n\_q"
+	"*  You decide to take back the offering...\w8\w7\n\n\_q"
+	--
+	"\0\s[7]\i[70]\i[70]'YOU \f[bold,1]\s[8]BASTARD!!'\f[bold,0]\w8\w8\w4\n\n[half]'HOW \i[80]DARE YOU STEAL THAT OFFERING!!\w8\w8\w8'I will remember this...\w8\w8\w8\w8\w8\w8\w8\w8\w8\w8'\1\s[13]\e"
+	"\0\s[7]\i[70]'PUT. \w8\w8\s[8]\i[80]IT.\w8\w8\s[9]\i[90]BACK!!!'\1\s[13]"
+}
+
+Select.notakeoffering
+{
+	NotStealOffering
+}
+
+//----------above menus
+NotStealOffering : all
+{
+	negativeact -= 1
+	positiveact += 1
+	
+	"\1\b[4]\" 
+	"*  You decide not to steal the offering after all...\w5\n\_q"
+	--
+	"\![*]\q[Main Menu,BACKTOMENU] \![*]\q[Nevermind.,CANCEL]\e"
+}
+
+//StealOffering : all
+//{
+//	"\1\b[4]\" 
+//	"*  You decide to take the offering from Obie...\w8\w7\n\n\_q"
+//	"*  You decide to take the offering from the Alter...\w8\w7\n\n\_q"
+//	"*  You decide to take back the offering...\w8\w7\n\n\_q"
+//	--
+//}

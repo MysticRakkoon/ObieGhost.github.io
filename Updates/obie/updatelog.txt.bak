@@ -1,14 +1,34 @@
 v1.0.0.8-alpha //pre-release
 
 	Updated Features:
+		- I THINK?????? I defined punchobie and petobie- so obie has a punch counter to see how many times it has been punched and pet
+		-	stats for petobie is working and shows how many time youve pet them 
 	
+		- menu.dic
+			- fixed and added selections for the offeringmenu
+				- this included dialogue
+				//-I NEED TO MAKE THE ITEMS TO BE GIVEN TO OBIE
+		
+		- mouse.dic
+			- created the options of taking and giving offerings with cliff and in the main menu
+			- added punchobie and petobie definitions and counts (I hope it works?)
+			- added negativeact and positiveact definitions and counts for punches and pets 
+			
 		- Surface images updated
 			
 			- Eye is changed to match the style of Obie 
 			
+			-Changed images to be 'base' rather than 'overlay' 
+			
+			-default image is saved as a base rather than overlay
+			
 			- changed images from base to overlay to see if overlapping images will be fixed
 			
 			- Added surface13 for the fire alter animation 
+			
+			surface alias added
+				-created \s[angrypose] for a randomized angry pose - going to see if i can change what i have from %(angrypose) to \s[angrypose] instead
+				-created \s[idlepose] for a randomized idle pose
 			
 			-created turning animations for surfaces 0 and 1
 			
@@ -17,11 +37,14 @@ v1.0.0.8-alpha //pre-release
 					- right now they are built in peices so i have to stitch them together with the movements or else obie wont be face the direction it is supposed to be moving
 						-30 corrisponds with 40 and 31 corrisponds with 41
 			
-		- added all of these to bootend.dic - want to add a positive and negative acts for the user to use - but havent fully figured out how to patch that in 
-			- resetcount = 0
-			- positiveact = 0
-			- negativeact = 0
+		- Bootend.dic
+			- added all of these to bootend.dic - want to add a positive and negative acts for the user to use - but havent fully figured out how to patch that in 
+				- resetcount = 0
+				- positiveact = 0
+				- negativeact = 0
 				- this all is to set up the pos and neg interactions 
+			
+			- added uninstalledit = 1 if he has been uninstalled and then reinstalled
 		
 		-fixed some typos in bootend.dic
 
